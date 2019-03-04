@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using FlexiMvvm.Bootstrappers;
 using FlexiMvvm.Ioc;
@@ -12,7 +13,7 @@ namespace VacationsTracker.Android.Views
 {
     [Activity(
         MainLauncher = true,
-        NoHistory = true)]
+        NoHistory = true, ScreenOrientation = ScreenOrientation.Portrait)]
     public class SplashScreenActivity : FlxAppCompatActivity<EntryViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)

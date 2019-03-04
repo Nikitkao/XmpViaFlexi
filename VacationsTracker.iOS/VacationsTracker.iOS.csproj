@@ -67,6 +67,7 @@
     <Compile Include="Views\Login\LoginView.cs" />
     <Compile Include="Views\Login\LoginViewController.cs" />
     <Compile Include="Views\RootNavigationController.cs" />
+    <BundleResource Include="Resources\splash.jpg" />
     <None Include="Info.plist" />
     <Compile Include="Navigation\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VacationsTracker.Core\VacationsTracker.Core.csproj">

@@ -26,6 +26,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
+						<constraints>
+                            <constraint id="1332" firstItem="445" firstAttribute="top" secondItem="223" secondAttribute="top"/>
+                            <constraint id="1333" firstItem="445" firstAttribute="bottom" secondItem="223" secondAttribute="bottom"/>
+                            <constraint id="1334" firstItem="445" firstAttribute="left" secondItem="223" secondAttribute="left"/>
+                            <constraint id="1335" firstItem="445" firstAttribute="right" secondItem="223" secondAttribute="right"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="224" userLabel="First Responder" sceneMemberID="firstResponder"/>

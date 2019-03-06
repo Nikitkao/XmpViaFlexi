@@ -6,7 +6,7 @@ namespace VacationsTracker.Core.Bootstrappers
     public static class BootstrapperConfigExtensions
     {
         private const string SimpleIocKey = "SimpleIoc";
-
+        
         public static ISimpleIoc GetSimpleIoc(this BootstrapperConfig config)
         {
             return (ISimpleIoc)config.Get(SimpleIocKey);
@@ -16,6 +16,5 @@ namespace VacationsTracker.Core.Bootstrappers
         {
             config.Set(SimpleIocKey, simpleIoc);
         }
-
     }
 }

@@ -2,11 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FlexiMvvm.Bindings.PreRelease" Version="0.9.7-prerelease" />
@@ -14,7 +11,39 @@
     <PackageReference Include="FlexiMvvm.Essentials.PreRelease" Version="0.9.7-prerelease" />
     <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.9.7-prerelease" />
     <PackageReference Include="FlexiMvvm.Validation.PreRelease" Version="0.9.7-prerelease" />
+    <PackageReference Include="IdentityModel" Version="3.10.6" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resourses\ResxToXmlFileTransformer.log">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResxToXmlFileTransformer.tt</DependentUpon>
+    </None>
+    <None Update="Resourses\ResxToXmlFileTransformer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ResxToXmlFileTransformer.log</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resourses\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resourses\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

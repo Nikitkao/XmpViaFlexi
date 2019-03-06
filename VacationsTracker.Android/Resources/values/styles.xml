@@ -1,13 +1,36 @@
 <resources>
-  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
-  </style>
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light"></style>
 
-  <style name="MyTheme" parent="MyTheme.Base">
-  </style>
-
+  <style name="MyTheme" parent="MyTheme.Base"></style>
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowBackground">@drawable/splash_screen</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowFullscreen">true</item>
+  </style>
+  <style name="EditTextStyle" >
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">#ffffff</item>
+    <item name="android:paddingLeft">@dimen/text_edit_left_padding</item>
+    <item name="android:layout_width">@dimen/text_edit_width</item>
+    <item name="android:layout_height">@dimen/text_edit_height</item>
+  </style>
+  <style name="SignInButtonStyle" >
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:background">#00ffff</item>
+    <item name="android:layout_width">@dimen/sign_in_button_width</item>
+    <item name="android:layout_height">@dimen/sign_in_button_height</item>
+  </style>
+  <style name="SignInErrorTextStyle" >
+    <item name="android:background">#ffffff</item>
+    <item name="android:layout_width">@dimen/text_edit_width</item>
+    <item name="android:layout_height">@dimen/error_text_view_height</item>
+    <item name="android:gravity">center</item>
+  </style>
+  <style name="TriangleStyle" >
+    <item name="android:rotation">180</item>
+    <item name="android:layout_width">@dimen/triangle_shape_side</item>
+    <item name="android:layout_height">@dimen/triangle_shape_side</item>
+    <item name="android:layout_gravity">center_horizontal</item>
+    <item name="android:src">@drawable/shape_triangle</item>
   </style>
 </resources>

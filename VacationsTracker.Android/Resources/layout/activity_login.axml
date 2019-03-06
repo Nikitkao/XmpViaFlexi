@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-	android:background="#FFFFFF"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:background="@drawable/login_bg"
 	android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login Activity"/>
-</LinearLayout>
+	<Button
+		android:id="@+id/sign_in_button"
+		style="@style/SignInButtonStyle"
+		android:layout_centerInParent="true"
+		android:text="@string/login_page_sign_in"
+		android:layout_marginTop="@dimen/sign_in_button_top_margin" />
+	<EditText
+		android:id="@+id/password_edit_text"
+		style="@style/EditTextStyle"
+		android:layout_above="@id/sign_in_button"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="@dimen/password_edit_text_top_margin"
+		android:hint="@string/login_page_password_placeholder" />
+	<EditText
+		android:id="@+id/login_edit_text"
+		style="@style/EditTextStyle"
+		android:layout_above="@id/password_edit_text"
+		android:layout_centerHorizontal="true"
+		android:hint="@string/login_page_login_placeholder" />
+	<LinearLayout
+		android:id="@+id/error_message_layout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_marginBottom="@dimen/error_layout_bottom_margin"
+		android:layout_above="@id/login_edit_text"
+		android:layout_centerHorizontal="true" >
+		<TextView
+			android:id="@+id/error_message_text_view"
+			style="@style/SignInErrorTextStyle" />
+		<ImageView 
+			style="@style/TriangleStyle" />
+		</LinearLayout>
+</RelativeLayout>

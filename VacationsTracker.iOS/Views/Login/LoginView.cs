@@ -6,7 +6,15 @@ namespace VacationsTracker.iOS.Views.Login
 {
     public class LoginView : LayoutView
     {
-        private UILabel TitleLabel { get; set; }
+        public UITextField LoginTextFiled { get; set; }
+        
+        public UITextField PasswordTextField { get; set; }
+
+        public UIButton LoginButton { get; private set; }
+
+        public UIImageView BackgroundImage { get; set; }
+
+        public UILabel ErrorMessage { get; set; }
 
         protected override void SetupSubviews()
         {
@@ -14,18 +22,46 @@ namespace VacationsTracker.iOS.Views.Login
 
             BackgroundColor = UIColor.White;
 
-            TitleLabel = new UILabel
+            BackgroundImage = new UIImageView(UIImage.FromFile("Login_bg.jpg"));
+
+            LoginTextFiled = new UITextField
             {
-                Text = "Login View Controller",
-                TextColor = UIColor.Green
+                Placeholder = "Login",
+                BackgroundColor = UIColor.White
+                
             };
+
+            PasswordTextField = new UITextField()
+            {
+                Placeholder = "Password",
+                BackgroundColor = UIColor.White,
+                
+
+            };
+
+            LoginButton = new UIButton();
+            LoginButton.SetTitle("sign in".ToUpper(), UIControlState.Normal);
+            LoginButton.BackgroundColor = UIColor.Cyan;
+
+            ErrorMessage = new UILabel
+            {
+                Text = "Please, retry your login and password pair. Check current Caps Lock and input settings",
+                Lines = 5,
+                BackgroundColor = UIColor.White,
+                TextAlignment = UITextAlignment.Center
+            };
+
         }
 
         protected override void SetupLayout()
         {
             base.SetupLayout();
 
-            this.AddLayoutSubview(TitleLabel);
+            AddSubview(BackgroundImage);
+            AddSubview(LoginTextFiled);
+            AddSubview(PasswordTextField);
+            AddSubview(LoginButton);
+            AddSubview(ErrorMessage);
         }
 
         protected override void SetupLayoutConstraints()
@@ -34,10 +70,38 @@ namespace VacationsTracker.iOS.Views.Login
 
             this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
+            this.AddConstraints(BackgroundImage.WithSameRight(this),
+                BackgroundImage.WithSameLeft(this),
+                BackgroundImage.WithSameTop(this),
+                BackgroundImage.WithSameBottom(this));
+
             this.AddConstraints(
-                TitleLabel.AtLeftOf(this),
-                TitleLabel.WithSameCenterY(this),
-                TitleLabel.AtRightOf(this));
+                LoginButton.BelowCenterOf(this, 40),
+                LoginButton.Height().EqualTo(45),
+                LoginButton.AtLeftOf(PasswordTextField, 10),
+                LoginButton.AtRightOf(PasswordTextField, 10)
+                );
+
+            this.AddConstraints(
+                
+                PasswordTextField.Above(LoginButton, 15),
+                PasswordTextField.Height().EqualTo(45),
+                PasswordTextField.AtLeftOf(this, 40),
+                PasswordTextField.AtRightOf(this, 40));
+
+            this.AddConstraints(
+                
+                LoginTextFiled.Above(PasswordTextField, 10),
+                LoginTextFiled.Height().EqualTo(45),
+                LoginTextFiled.AtLeftOf(this, 40),
+                LoginTextFiled.AtRightOf(this, 40));
+
+            this.AddConstraints(
+
+                ErrorMessage.Above(LoginTextFiled, 20),
+                //ErrorMessage.Height().EqualTo(60),
+                ErrorMessage.AtLeftOf(this, 40),
+                ErrorMessage.AtRightOf(this, 40));
         }
     }
 }

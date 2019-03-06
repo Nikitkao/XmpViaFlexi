@@ -15,7 +15,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels
         protected override void Initialize()
         {
             base.Initialize();
-
             _navigationService.NavigateToLogin(this);
         }
     }

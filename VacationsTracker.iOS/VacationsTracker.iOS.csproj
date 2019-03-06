@@ -68,6 +68,14 @@
     <Compile Include="Views\Login\LoginViewController.cs" />
     <Compile Include="Views\RootNavigationController.cs" />
     <BundleResource Include="Resources\splash.jpg" />
+    <BundleResource Include="Resources\Icon_Request_Blue.png" />
+    <BundleResource Include="Resources\Icon_Request_Dark.png" />
+    <BundleResource Include="Resources\Icon_Request_Gray.png" />
+    <BundleResource Include="Resources\Icon_Request_Green.png" />
+    <BundleResource Include="Resources\Icon_Request_Plum.png" />
+    <BundleResource Include="Resources\Login_bg.jpg" />
+    <BundleResource Include="Resources\material_add_white.png" />
+    <BundleResource Include="Resources\Avatar_Ark.png" />
     <None Include="Info.plist" />
     <Compile Include="Navigation\NavigationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.FluentLayouts.Touch, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cirrious.FluentLayout.2.7.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
+      <HintPath>..\packages\Cirrious.FluentLayout.2.9.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
     </Reference>
     <Reference Include="FlexiMvvm.Bindings, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FlexiMvvm.Bindings.PreRelease.0.9.7-prerelease\lib\xamarinios10\FlexiMvvm.Bindings.dll</HintPath>
@@ -85,8 +93,8 @@
     <Reference Include="FlexiMvvm.Collections, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FlexiMvvm.Collections.PreRelease.0.9.7-prerelease\lib\xamarinios10\FlexiMvvm.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="FlexiMvvm.Common, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FlexiMvvm.Common.PreRelease.0.9.6-prerelease\lib\netstandard2.0\FlexiMvvm.Common.dll</HintPath>
+    <Reference Include="FlexiMvvm.Common, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FlexiMvvm.Common.PreRelease.0.9.7-prerelease\lib\netstandard2.0\FlexiMvvm.Common.dll</HintPath>
     </Reference>
     <Reference Include="FlexiMvvm.Essentials, Version=0.9.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FlexiMvvm.Essentials.PreRelease.0.9.7-prerelease\lib\xamarinios10\FlexiMvvm.Essentials.dll</HintPath>
@@ -97,7 +105,16 @@
     <Reference Include="FlexiMvvm.Lifecycle, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FlexiMvvm.Lifecycle.PreRelease.0.9.7-prerelease\lib\xamarinios10\FlexiMvvm.Lifecycle.dll</HintPath>
     </Reference>
+    <Reference Include="IdentityModel, Version=3.10.6.0, Culture=neutral, PublicKeyToken=e7877f4675df049f, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityModel.3.10.6\lib\netstandard2.0\IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

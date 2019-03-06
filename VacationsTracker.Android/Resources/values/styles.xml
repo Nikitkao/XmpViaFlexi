@@ -8,23 +8,35 @@
     <item name="android:windowFullscreen">true</item>
   </style>
   <style name="EditTextStyle" >
+    <item name="android:maxLines">1</item>
+    <item name="android:inputType">text</item>
     <item name="android:gravity">center_vertical</item>
     <item name="android:background">#ffffff</item>
-    <item name="android:paddingLeft">@dimen/text_edit_left_padding</item>
-    <item name="android:layout_width">@dimen/text_edit_width</item>
+    <item name="android:paddingLeft">@dimen/Inset1x</item>
+    <item name="android:layout_marginLeft">@dimen/Inset4x</item>
+    <item name="android:layout_marginRight">@dimen/Inset4x</item>
+    <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">@dimen/text_edit_height</item>
   </style>
   <style name="SignInButtonStyle" >
     <item name="android:textColor">#ffffff</item>
     <item name="android:background">#00ffff</item>
-    <item name="android:layout_width">@dimen/sign_in_button_width</item>
+    <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">@dimen/sign_in_button_height</item>
+    <item name="android:layout_marginRight">@dimen/Inset8x</item>
+    <item name="android:layout_marginLeft">@dimen/Inset8x</item>
   </style>
   <style name="SignInErrorTextStyle" >
     <item name="android:background">#ffffff</item>
-    <item name="android:layout_width">@dimen/text_edit_width</item>
-    <item name="android:layout_height">@dimen/error_text_view_height</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
     <item name="android:gravity">center</item>
+    <item name="android:layout_marginLeft">@dimen/Inset4x</item>
+    <item name="android:layout_marginRight">@dimen/Inset4x</item>
+    <item name="android:paddingTop">@dimen/Inset3x</item>
+    <item name="android:paddingBottom">@dimen/Inset3x</item>
+    <item name="android:paddingRight">@dimen/Inset2x</item>
+    <item name="android:paddingLeft">@dimen/Inset2x</item>
   </style>
   <style name="TriangleStyle" >
     <item name="android:rotation">180</item>

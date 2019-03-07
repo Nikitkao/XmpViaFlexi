@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using FlexiMvvm;
@@ -27,7 +26,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
         private string _password;
         private string _errorMessage;
 
-        public FlexiMvvm.Commands.ICommand LoginCommand => CommandProvider.GetForAsync(OnLogin);
+        public ICommand LoginCommand => CommandProvider.GetForAsync(OnLogin);
 
         public LoginViewModel(INavigationService navigationService, IUserRepository userRepository, IOperationFactory operationFactory) : base(operationFactory)
         {
@@ -73,7 +72,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
                     user.ValidateCredentials();
                     return _userRepository.AuthorizeAsync(user, token);
                 })
-                .OnSuccess(() => _navigationService.NavigateToHome(this))
+                .OnSuccess(() => _navigationService.NavigateToMainList(this))
                 .OnError<AuthenticationException>(_ => SetError(Strings.LoginPage_InvalidCredentials))
                 .OnError<EmptyPasswordException>(_ => SetError(Strings.LoginPage_InvalidPassword))
                 .OnError<EmptyLoginException>(_ => SetError(Strings.LoginPage_InvalidLogin))

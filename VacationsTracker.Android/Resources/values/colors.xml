@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2c3e50</color>
-    <color name="colorPrimaryDark">#1B3147</color>
-    <color name="colorAccent">#3498db</color>
+  <color name="colorPrimary">#2c3e50</color>
+  <color name="colorPrimaryDark">#CCCCCC</color>
+  <color name="colorSplashBackground">#ffffff</color>
+  <color name="colorLightBlue">#41C0DA</color>
+  <color name="colorLightGreen">#A0CC4B</color>
+  <color name="colorErrorText">#800000</color>
+  <color name="colorAccent">#41C0DA</color>
+  <color name="colorNavigationViewBackground">#CCCCCC</color>
+  <color name="colorNavigationViewItemBackground">#FAFAFA</color>
 </resources>

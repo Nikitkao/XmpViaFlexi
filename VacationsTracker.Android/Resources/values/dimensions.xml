@@ -15,4 +15,6 @@
   <dimen name="Inset6x">48dp</dimen>
   <dimen name="Inset7x">56dp</dimen>
   <dimen name="Inset8x">64dp</dimen>
+  <dimen name="FabDefaultRadius">48dp</dimen>
+  <dimen name="ToolbarDefaultHeight">40dp</dimen>
 </resources>

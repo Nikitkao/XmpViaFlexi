@@ -1,6 +1,4 @@
-﻿
-
-using Android.Content;
+﻿using Android.Content;
 using FlexiMvvm;
 using FlexiMvvm.Navigation;
 using VacationsTracker.Android.Views;
@@ -12,9 +10,19 @@ namespace VacationsTracker.Android.Navigation
 {
     public class NavigationService : NavigationServiceBase, INavigationService
     {
-        public void NavigateToHome(LoginViewModel fromViewModel)
+        public void NavigateToMainList(LoginViewModel fromViewModel)
         {
-            throw new System.NotImplementedException();
+            var loginActivity = GetActivity<LoginViewModel, LoginActivity>(fromViewModel);
+            var mainListIntent = new Intent(loginActivity, typeof(MainListActivity));
+            mainListIntent.AddFlags(ActivityFlags.ClearTask | ActivityFlags.ClearTop | ActivityFlags.NewTask);
+            loginActivity.NotNull().StartActivity(mainListIntent);
+        }
+
+        public void NavigateToMainList(EntryViewModel fromViewModel)
+        {
+            var splashScreenActivity = GetActivity<EntryViewModel, SplashScreenActivity>(fromViewModel);
+            var mainListIntent = new Intent(splashScreenActivity, typeof(MainListActivity));
+            splashScreenActivity.NotNull().StartActivity(mainListIntent);
         }
 
         public void NavigateToLogin(EntryViewModel fromViewModel)

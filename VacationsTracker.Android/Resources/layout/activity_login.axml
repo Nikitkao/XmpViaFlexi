@@ -15,7 +15,6 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical" >
 			<TextView
-				android:text="Please, retry your login and password pair. Check current Caps Lock and input language settings"
 				android:id="@+id/error_message_text_view"
 				style="@style/SignInErrorTextStyle" />
 			<ImageView 

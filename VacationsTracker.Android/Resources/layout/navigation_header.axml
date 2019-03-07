@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:paddingTop="@dimen/Inset2x"
+	android:paddingBottom="@dimen/Inset2x"
+	android:background="@android:color/white">
+	<ImageView
+		android:id="@+id/user_image"
+		android:layout_width="100dp"
+		android:layout_height="100dp"
+		android:adjustViewBounds="false"
+		
+		android:layout_gravity="center_horizontal"
+		/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/Inset1x"
+		android:text="Name Surname"
+		android:layout_gravity="center_horizontal"
+		android:textColor="@color/colorLightBlue"
+		android:textStyle="bold"/>
+</LinearLayout>

@@ -45,4 +45,36 @@
     <item name="android:layout_gravity">center_horizontal</item>
     <item name="android:src">@drawable/shape_triangle</item>
   </style>
+  <style name="FabStyle">
+    <item name="android:layout_width">@dimen/FabDefaultRadius</item>
+    <item name="android:layout_height">@dimen/FabDefaultRadius</item>
+    <item name="android:src">@drawable/material_add_white</item>
+  </style>
+  <style name="ToolbarTheme" parent="Theme.AppCompat">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/ToolbarDefaultHeight</item>
+    <item name="colorPrimary">@color/colorLightBlue</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:background">?attr/colorPrimary</item>
+  </style>
+  <style name="ToolbarTitleStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+  <style name="ToolbarButtonStyle1">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@null</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+  <style name="ToolbarButtonStyle2">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@null</item>
+    <item name="android:textColor">@android:color/holo_red_light</item>
+  </style>
 </resources>

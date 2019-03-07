@@ -2,6 +2,7 @@
 // ReSharper disable All
 using System;
 using Android.App;
+using Android.Support.V4.Widget;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
@@ -12,11 +13,11 @@ namespace VacationsTracker.Android.Views
     {
          private readonly Activity activity;
 
-         private Button signInButton;
-         private EditText passwordEditText;
-         private EditText loginEditText;
          private LinearLayout errorMessageLayout;
          private TextView errorMessageTextView;
+         private EditText loginEditText;
+         private EditText passwordEditText;
+         private Button signInButton;
 
         public LoginActivityViewHolder( Activity activity)
         {
@@ -26,24 +27,64 @@ namespace VacationsTracker.Android.Views
         }
 
         
-        public Button SignInButton =>
-            signInButton ?? (signInButton = activity.FindViewById<Button>(Resource.Id.sign_in_button));
-
-        
-        public EditText PasswordEditText =>
-            passwordEditText ?? (passwordEditText = activity.FindViewById<EditText>(Resource.Id.password_edit_text));
-
-        
-        public EditText LoginEditText =>
-            loginEditText ?? (loginEditText = activity.FindViewById<EditText>(Resource.Id.login_edit_text));
-
-        
         public LinearLayout ErrorMessageLayout =>
             errorMessageLayout ?? (errorMessageLayout = activity.FindViewById<LinearLayout>(Resource.Id.error_message_layout));
 
         
         public TextView ErrorMessageTextView =>
             errorMessageTextView ?? (errorMessageTextView = activity.FindViewById<TextView>(Resource.Id.error_message_text_view));
+
+        
+        public EditText LoginEditText =>
+            loginEditText ?? (loginEditText = activity.FindViewById<EditText>(Resource.Id.login_edit_text));
+
+        
+        public EditText PasswordEditText =>
+            passwordEditText ?? (passwordEditText = activity.FindViewById<EditText>(Resource.Id.password_edit_text));
+
+        
+        public Button SignInButton =>
+            signInButton ?? (signInButton = activity.FindViewById<Button>(Resource.Id.sign_in_button));
     }
+
+    public partial class MainListActivityViewHolder
+    {
+         private readonly Activity activity;
+
+         private DrawerLayout drawerLayout1;
+
+        public MainListActivityViewHolder( Activity activity)
+        {
+            if (activity == null) throw new ArgumentNullException(nameof(activity));
+
+            this.activity = activity;
+        }
+
+        
+        public DrawerLayout DrawerLayout1 =>
+            drawerLayout1 ?? (drawerLayout1 = activity.FindViewById<DrawerLayout>(Resource.Id.drawerLayout1));
+    }
+
+    /*
+    "LayoutDefinitionOptions" are not specified for "navigation_header" layout file therefore view holder can't be generated for it.
+    public partial class HeaderNavigationViewHolder
+    {
+    }
+    */
+
+    /*
+    "LayoutDefinitionOptions" are not specified for "navigation_menu" layout file therefore view holder can't be generated for it.
+    public partial class MenuNavigationViewHolder
+    {
+    }
+    */
+
+    /*
+    "LayoutDefinitionOptions" are not specified for "toolbar" layout file therefore view holder can't be generated for it.
+    public partial class ToolbarViewHolder
+    {
+    }
+    */
+
 }
 // ReSharper restore All

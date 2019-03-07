@@ -7,6 +7,8 @@ namespace VacationsTracker.Core.Navigation
     {
         void NavigateToLogin(EntryViewModel fromViewModel);
 
-        void NavigateToHome(LoginViewModel fromViewModel);
+        void NavigateToMainList(LoginViewModel fromViewModel);
+
+        void NavigateToMainList(EntryViewModel fromViewModel);
     }
 }

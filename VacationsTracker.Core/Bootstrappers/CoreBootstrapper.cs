@@ -28,7 +28,7 @@ namespace VacationsTracker.Core.Bootstrappers
             simpleIoc.Register<IErrorHandler>(() => new ExceptionHandler());
             simpleIoc.Register<IConnectivity>(() => Connectivity.Instance);
             simpleIoc.Register<IConnectivityService>(() => new ConnectivityService(simpleIoc.Get<IConnectivity>()), Reuse.Singleton);
-            simpleIoc.Register<ISecureStorage>(() => new VacationSimulatorSecureStorage(), Reuse.Singleton);
+            simpleIoc.Register<ISecureStorage>(() => new CustomSecureStorage(), Reuse.Singleton);
             simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>()));
             simpleIoc.Register<IDependencyProvider>(() => new DependencyProvider(simpleIoc.Get<IConnectivityService>()));
             simpleIoc.Register<IOperationFactory>(() => new OperationFactory(

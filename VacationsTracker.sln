@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationsTracker.Core", "VacationsTracker.Core\VacationsTracker.Core.csproj", "{47BBAC44-275A-4718-80AC-62A218EF914A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacationsTracker.Core", "VacationsTracker.Core\VacationsTracker.Core.csproj", "{47BBAC44-275A-4718-80AC-62A218EF914A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationsTracker.Android", "VacationsTracker.Android\VacationsTracker.Android.csproj", "{CDD1C44A-AFF0-489C-8497-8A0C32238B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationsTracker.Droid", "VacationsTracker.Droid\VacationsTracker.Droid.csproj", "{CDD1C44A-AFF0-489C-8497-8A0C32238B39}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationsTracker.iOS", "VacationsTracker.iOS\VacationsTracker.iOS.csproj", "{80A96B52-6758-4BDB-B0B4-CEA4CA155C60}"
 EndProject

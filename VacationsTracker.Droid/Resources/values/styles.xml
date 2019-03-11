@@ -1,0 +1,114 @@
+<resources>
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light"></style>
+
+  <style name="MyTheme" parent="MyTheme.Base"></style>
+  <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">true</item>
+  </style>
+  <style name="EditTextStyle" >
+    <item name="android:maxLines">1</item>
+    <item name="android:inputType">text</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:background">#ffffff</item>
+    <item name="android:paddingLeft">@dimen/Inset1x</item>
+    <item name="android:layout_marginLeft">@dimen/Inset4x</item>
+    <item name="android:layout_marginRight">@dimen/Inset4x</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/text_edit_height</item>
+  </style>
+  <style name="SignInButtonStyle" >
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:background">#00ffff</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/sign_in_button_height</item>
+    <item name="android:layout_marginRight">@dimen/Inset8x</item>
+    <item name="android:layout_marginLeft">@dimen/Inset8x</item>
+  </style>
+  <style name="SignInErrorTextStyle" >
+    <item name="android:background">#ffffff</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:gravity">center</item>
+    <item name="android:layout_marginLeft">@dimen/Inset4x</item>
+    <item name="android:layout_marginRight">@dimen/Inset4x</item>
+    <item name="android:paddingTop">@dimen/Inset3x</item>
+    <item name="android:paddingBottom">@dimen/Inset3x</item>
+    <item name="android:paddingRight">@dimen/Inset2x</item>
+    <item name="android:paddingLeft">@dimen/Inset2x</item>
+  </style>
+  <style name="TriangleStyle" >
+    <item name="android:rotation">180</item>
+    <item name="android:layout_width">@dimen/triangle_shape_side</item>
+    <item name="android:layout_height">@dimen/triangle_shape_side</item>
+    <item name="android:layout_gravity">center_horizontal</item>
+    <item name="android:src">@drawable/shape_triangle</item>
+  </style>
+  <style name="FabStyle">
+    <item name="android:layout_width">@dimen/FabDefaultRadius</item>
+    <item name="android:layout_height">@dimen/FabDefaultRadius</item>
+    <item name="android:src">@drawable/material_add_white</item>
+  </style>
+  <style name="ToolbarTheme" parent="Theme.AppCompat">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/ToolbarDefaultHeight</item>
+    <item name="colorPrimary">@color/colorLightBlue</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:background">?attr/colorPrimary</item>
+  </style>
+  <style name="ToolbarTitleStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+  <style name="ToolbarButtonStyle1">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@null</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+  <style name="ToolbarButtonStyle2">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@null</item>
+    <item name="android:textColor">@android:color/holo_red_light</item>
+  </style>
+  <style name="GraySeparatorStyle" parent="SeparatorStyle">
+    <item name="android:background">@android:color/darker_gray</item>
+  </style>
+  <style name="VacationCellStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">56dp</item>
+    <item name="android:paddingTop">8dp</item>
+  </style>
+  <style name="VacationImageStyle">
+    <item name="android:layout_height">@dimen/VacationImageDefaultHeight</item>
+    <item name="android:layout_width">wrap_content</item>
+  </style>
+  <style name="VacationDurationStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  <!-- <item name="android:textAppearance">?android:attr/textAppearanceListItem</item> -->
+    <item name="android:textColor">@color/colorLightBlue</item>
+  </style>
+  <style name="SeparatorStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">@dimen/SeparatorDefaultThickness</item>
+  </style>
+  <style name="VacationTypeStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">@android:color/darker_gray</item>
+  </style>
+  <style name="VacationStatusStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_centerInParent">true</item>
+    <item name="android:paddingRight">@dimen/Inset1x</item>
+    <item name="android:textColor">@android:color/darker_gray</item>
+  </style>
+</resources>

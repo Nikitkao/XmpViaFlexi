@@ -8,20 +8,18 @@ using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Domain;
 using VacationsTracker.Core.Domain.Exceptions;
 using VacationsTracker.Core.Exceptions;
-//using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Operations;
-using VacationsTracker.Core.Resourses;
-//using VacationsTracker.Core.Operations;
-//using VacationsTracker.Core.Resources;
+using VacationsTracker.Core.Resources;
 
 namespace VacationsTracker.Core.Presentation.ViewModels.Login
 {
-    public class LoginViewModel : ViewModelBase//, Operations.IViewModelWithOperation
+    public class LoginViewModel : ViewModelBase, IViewModelWithOperation
     {
         private readonly INavigationService _navigationService;
         private readonly IUserRepository _userRepository;
         private bool _errorVisibility;
+        private bool _busy;
         private string _login;
         private string _password;
         private string _errorMessage;
@@ -37,7 +35,13 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
         public string Login
         {
             get => _login;
-            set => Set(ref _login, value);
+            set
+            {
+                if (_login != value)
+                {
+                    Set(ref _login, value);
+                }
+            }
         }
 
         public string Password
@@ -58,13 +62,19 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
             set => Set(ref _errorMessage, value);
         }
 
+        public bool Busy
+        {
+            get => _busy;
+            set => Set(ref _busy, value);
+        }
+        
         private Task OnLogin()
         {
             ErrorVisibility = false;
 
              return OperationFactory
                 .CreateOperation(OperationContext)
-                //.WithLoadingNotification()
+                .WithLoadingNotification()
                 .WithInternetConnectionCondition()
                 .WithExpressionAsync(token =>
                 {
@@ -72,7 +82,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
                     user.ValidateCredentials();
                     return _userRepository.AuthorizeAsync(user, token);
                 })
-                .OnSuccess(() => _navigationService.NavigateToMainList(this))
+                .OnSuccess(() => _navigationService.NavigateToHome(this))
                 .OnError<AuthenticationException>(_ => SetError(Strings.LoginPage_InvalidCredentials))
                 .OnError<EmptyPasswordException>(_ => SetError(Strings.LoginPage_InvalidPassword))
                 .OnError<EmptyLoginException>(_ => SetError(Strings.LoginPage_InvalidLogin))

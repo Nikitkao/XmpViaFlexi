@@ -24,7 +24,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels
             if (string.IsNullOrEmpty(token))
                 _navigationService.NavigateToLogin(this);
             else
-                _navigationService.NavigateToMainList(this);
+                _navigationService.NavigateToHome(this);
         }
     }
 }

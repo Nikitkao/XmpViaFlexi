@@ -4,6 +4,7 @@ using FlexiMvvm.Bootstrappers;
 using FlexiMvvm.Ioc;
 using FlexiMvvm.Operations;
 using VacationsTracker.Core.Application.Connectivity;
+using VacationsTracker.Core.Data;
 using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Infrastructure;
 using VacationsTracker.Core.Infrastructure.Connectivity;
@@ -30,6 +31,8 @@ namespace VacationsTracker.Core.Bootstrappers
             simpleIoc.Register<IConnectivityService>(() => new ConnectivityService(simpleIoc.Get<IConnectivity>()), Reuse.Singleton);
             simpleIoc.Register<ISecureStorage>(() => new CustomSecureStorage(), Reuse.Singleton);
             simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>()));
+            simpleIoc.Register<IVacationApi>(() => new VacationsApi(simpleIoc.Get<ISecureStorage>()));
+            simpleIoc.Register<IVacationRepository>(() => new VacationsRepository(simpleIoc.Get<IVacationApi>()));
             simpleIoc.Register<IDependencyProvider>(() => new DependencyProvider(simpleIoc.Get<IConnectivityService>()));
             simpleIoc.Register<IOperationFactory>(() => new OperationFactory(
                 simpleIoc.Get<IDependencyProvider>(),

@@ -1,4 +1,5 @@
 ﻿using VacationsTracker.Core.Presentation.ViewModels;
+using VacationsTracker.Core.Presentation.ViewModels.Home;
 using VacationsTracker.Core.Presentation.ViewModels.Login;
 
 namespace VacationsTracker.Core.Navigation
@@ -7,8 +8,10 @@ namespace VacationsTracker.Core.Navigation
     {
         void NavigateToLogin(EntryViewModel fromViewModel);
 
-        void NavigateToMainList(LoginViewModel fromViewModel);
+        void NavigateToHome(LoginViewModel fromViewModel);
 
-        void NavigateToMainList(EntryViewModel fromViewModel);
+        void NavigateToHome(EntryViewModel fromViewModel);
+
+        void NavigateToDetails(HomeViewModel fromViewModel, string vacationId);
     }
 }

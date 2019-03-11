@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FlexiMvvm.Operations;
+﻿using FlexiMvvm.Operations;
 
 namespace VacationsTracker.Core.Operations
 {

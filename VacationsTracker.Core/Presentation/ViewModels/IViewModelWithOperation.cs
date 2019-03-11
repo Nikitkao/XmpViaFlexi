@@ -2,6 +2,6 @@
 {
     public interface IViewModelWithOperation
     {
-        bool Busy { get; }
+        bool Busy { get; set; }
     }
 }

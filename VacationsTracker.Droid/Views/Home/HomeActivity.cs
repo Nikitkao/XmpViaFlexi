@@ -6,11 +6,10 @@ using Android.Support.V7.Widget;
 using Android.Widget;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Views.V7;
-using VacationsTracker.Droid.Views.MainList;
 using FlexiMvvm.Weak.Subscriptions;
 using VacationsTracker.Core.Presentation.ViewModels.Home;
 
-namespace VacationsTracker.Droid.Views
+namespace VacationsTracker.Droid.Views.Home
 {
     [Activity(Label = "HomeActivity")]
     public class HomeActivity : FlxBindableAppCompatActivity<HomeViewModel>

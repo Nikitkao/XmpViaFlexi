@@ -12,5 +12,14 @@ namespace VacationsTracker.Core.Domain
         public VacationStatus VacationStatus { get; set; }
         public string CreatedBy { get; set; }
         public DateTime Created { get; set; }
+
+        public void Deconstruct(out string _vacationid, out DateTime startdate, out DateTime enddate, out VacationStatus status, out VacationType type)
+        {
+            _vacationid = Id;
+            startdate = Start;
+            enddate = End;
+            status = VacationStatus;
+            type = VacationType;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VacationsTracker.Core.Data;
 using VacationsTracker.Core.Domain;
+using VacationsTracker.Core.Presentation.ViewModels;
 
 namespace VacationsTracker.Core.DataAccess
 {
@@ -20,18 +21,28 @@ namespace VacationsTracker.Core.DataAccess
             var vacations = await _vacationsApi.GetVacationsAsync();
 
             var vacancyList = new List<Vacation>();
-
             foreach (var vacationDto in vacations)
             {
-                vacancyList.Add(VacanciesDtoToVacanciesViewModel(vacationDto));
+                vacancyList.Add(vacationDto.ToVacation());
             }
 
             return vacancyList;
         }
 
-        private Vacation VacanciesDtoToVacanciesViewModel(VacationDto vac)
+        public async Task<Vacation> GetVacationAsync(string id, CancellationToken token = default)
         {
-            return vac.ToVacation();
+            var vacationDto = await _vacationsApi.GetVacationAsync(id);
+            return vacationDto.ToVacation();
+        }
+
+        public Task UpsertVacationAsync(VacationCellViewModel vacationViewModel, CancellationToken token = default)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteVacationAsync(string id, CancellationToken token = default)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

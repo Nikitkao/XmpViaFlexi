@@ -30,7 +30,7 @@ namespace VacationsTracker.Droid.Views
             bindingSet.Bind(VacationDuration)
                 .For(v => v.Text)
                 .To(vm => vm.Duration)
-                .WithConvertion<DurationToString>("MMM dd");
+                .WithConvertion<DurationToStringConverter>("MMM dd");
             
             bindingSet.Bind(VacationImage)
                 .For(v => v.SetImageResourceBinding())

@@ -26,13 +26,13 @@ namespace VacationsTracker.Core.Bootstrappers
 
         private void SetupDependencies(ISimpleIoc simpleIoc)
         {
-            simpleIoc.Register<IErrorHandler>(() => new ExceptionHandler());
+            simpleIoc.Register<IErrorHandler>(() => new ExceptionHandler(), Reuse.Singleton);
             simpleIoc.Register<IConnectivity>(() => Connectivity.Instance);
             simpleIoc.Register<IConnectivityService>(() => new ConnectivityService(simpleIoc.Get<IConnectivity>()), Reuse.Singleton);
             simpleIoc.Register<ISecureStorage>(() => new CustomSecureStorage(), Reuse.Singleton);
-            simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>()));
-            simpleIoc.Register<IVacationApi>(() => new VacationsApi(simpleIoc.Get<ISecureStorage>()));
-            simpleIoc.Register<IVacationRepository>(() => new VacationsRepository(simpleIoc.Get<IVacationApi>()));
+            simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>()), Reuse.Singleton);
+            simpleIoc.Register<IVacationApi>(() => new VacationsApi(simpleIoc.Get<ISecureStorage>()), Reuse.Singleton);
+            simpleIoc.Register<IVacationRepository>(() => new VacationsRepository(simpleIoc.Get<IVacationApi>()), Reuse.Singleton);
             simpleIoc.Register<IDependencyProvider>(() => new DependencyProvider(simpleIoc.Get<IConnectivityService>()));
             simpleIoc.Register<IOperationFactory>(() => new OperationFactory(
                 simpleIoc.Get<IDependencyProvider>(),

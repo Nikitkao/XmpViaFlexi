@@ -8,6 +8,8 @@ using VacationsTracker.Core.Presentation.ViewModels.Home;
 using VacationsTracker.Core.Presentation.ViewModels.Login;
 using FlexiMvvm.Views;
 using VacationsTracker.Core.Presentation.ViewModels.Details;
+using VacationsTracker.Droid.Views.Details;
+using VacationsTracker.Droid.Views.Home;
 
 namespace VacationsTracker.Droid.Navigation
 {

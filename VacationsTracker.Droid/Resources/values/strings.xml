@@ -5,6 +5,7 @@
     <string name="delete_navigation_button_text">Delete</string>
     <string name="home_page_logout_button_text">Logout</string>
     <string name="home_page_title">Requests</string>
+    <string name="details_page_title">Requests</string>
     <string name="login_page_invalid_credentials">Please, retry your login and password pair</string>
     <string name="login_page_invalid_login">Login field must not be empty</string>
     <string name="login_page_invalid_password">Password field must not be empty</string>

@@ -8,6 +8,99 @@ using Android.Widget;
 
 namespace VacationsTracker.Droid.Views
 {
+    public partial class DetailsActivityViewHolder
+    {
+         private readonly Activity activity;
+
+         private TextView navTitle;
+         private ProgressBar ctrlActivityIndicator;
+         private LinearLayout rootLayout;
+         private Android.Support.V4.View.ViewPager vacationTypePager;
+         private Android.Support.Design.Widget.TabLayout tabDots;
+         private RelativeLayout dateStart;
+         private TextView vacationStartDay;
+         private TextView vacationStartMonth;
+         private TextView vacationStartYear;
+         private RelativeLayout dateEnd;
+         private TextView vacationEndDay;
+         private TextView vacationEndMonth;
+         private TextView vacationEndYear;
+         private RadioGroup statusRadioGroup;
+         private RadioButton approvedRadio;
+         private RadioButton closedRadio;
+
+        public DetailsActivityViewHolder( Activity activity)
+        {
+            if (activity == null) throw new ArgumentNullException(nameof(activity));
+
+            this.activity = activity;
+        }
+
+        
+        public TextView NavTitle =>
+            navTitle ?? (navTitle = activity.FindViewById<TextView>(Resource.Id.nav_title));
+
+        
+        public ProgressBar CtrlActivityIndicator =>
+            ctrlActivityIndicator ?? (ctrlActivityIndicator = activity.FindViewById<ProgressBar>(Resource.Id.ctrlActivityIndicator));
+
+        
+        public LinearLayout RootLayout =>
+            rootLayout ?? (rootLayout = activity.FindViewById<LinearLayout>(Resource.Id.root_layout));
+
+        
+        public Android.Support.V4.View.ViewPager VacationTypePager =>
+            vacationTypePager ?? (vacationTypePager = activity.FindViewById<Android.Support.V4.View.ViewPager>(Resource.Id.vacation_type_pager));
+
+        
+        public Android.Support.Design.Widget.TabLayout TabDots =>
+            tabDots ?? (tabDots = activity.FindViewById<Android.Support.Design.Widget.TabLayout>(Resource.Id.tab_dots));
+
+        
+        public RelativeLayout DateStart =>
+            dateStart ?? (dateStart = activity.FindViewById<RelativeLayout>(Resource.Id.date_start));
+
+        
+        public TextView VacationStartDay =>
+            vacationStartDay ?? (vacationStartDay = activity.FindViewById<TextView>(Resource.Id.vacation_start_day));
+
+        
+        public TextView VacationStartMonth =>
+            vacationStartMonth ?? (vacationStartMonth = activity.FindViewById<TextView>(Resource.Id.vacation_start_month));
+
+        
+        public TextView VacationStartYear =>
+            vacationStartYear ?? (vacationStartYear = activity.FindViewById<TextView>(Resource.Id.vacation_start_year));
+
+        
+        public RelativeLayout DateEnd =>
+            dateEnd ?? (dateEnd = activity.FindViewById<RelativeLayout>(Resource.Id.date_end));
+
+        
+        public TextView VacationEndDay =>
+            vacationEndDay ?? (vacationEndDay = activity.FindViewById<TextView>(Resource.Id.vacation_end_day));
+
+        
+        public TextView VacationEndMonth =>
+            vacationEndMonth ?? (vacationEndMonth = activity.FindViewById<TextView>(Resource.Id.vacation_end_month));
+
+        
+        public TextView VacationEndYear =>
+            vacationEndYear ?? (vacationEndYear = activity.FindViewById<TextView>(Resource.Id.vacation_end_year));
+
+        
+        public RadioGroup StatusRadioGroup =>
+            statusRadioGroup ?? (statusRadioGroup = activity.FindViewById<RadioGroup>(Resource.Id.status_radio_group));
+
+        
+        public RadioButton ApprovedRadio =>
+            approvedRadio ?? (approvedRadio = activity.FindViewById<RadioButton>(Resource.Id.approved_radio));
+
+        
+        public RadioButton ClosedRadio =>
+            closedRadio ?? (closedRadio = activity.FindViewById<RadioButton>(Resource.Id.closed_radio));
+    }
+
     public partial class LoginActivityViewHolder
     {
          private readonly Activity activity;
@@ -113,6 +206,29 @@ namespace VacationsTracker.Droid.Views
         
         public View SeparatorView =>
             separatorView ?? (separatorView = ItemView.FindViewById<View>(Resource.Id.separator_view));
+    }
+
+    public partial class VacationTypeFragmentViewHolder
+    {
+         private readonly View rootView;
+
+         private ImageView imageVacationType;
+         private TextView textViewVacationName;
+
+        public VacationTypeFragmentViewHolder( View rootView)
+        {
+            if (rootView == null) throw new ArgumentNullException(nameof(rootView));
+
+            this.rootView = rootView;
+        }
+
+        
+        public ImageView ImageVacationType =>
+            imageVacationType ?? (imageVacationType = rootView.FindViewById<ImageView>(Resource.Id.image_vacation_type));
+
+        
+        public TextView TextViewVacationName =>
+            textViewVacationName ?? (textViewVacationName = rootView.FindViewById<TextView>(Resource.Id.text_view_vacation_name));
     }
 
     /*

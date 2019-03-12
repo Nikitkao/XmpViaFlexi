@@ -6,13 +6,12 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
     {
         public VacationDetailsParameters(string vacationId)
         {
-            this.VacationId = vacationId;
+            VacationId = vacationId;
         }
 
         public string VacationId
         {
             get => Bundle.GetString();
-
             set => Bundle.SetString(value);
         }
     }

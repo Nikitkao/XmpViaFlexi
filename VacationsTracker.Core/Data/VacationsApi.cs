@@ -20,10 +20,21 @@ namespace VacationsTracker.Core.Data
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
-        public async Task<IEnumerable<VacationDto>> GetVacationsAsync()
+        public Task<IEnumerable<VacationDto>> GetVacationsAsync()
         {
-            var requestUri = Settings.VacationApiUrl;
+            var request = new HttpRequestMessage(HttpMethod.Get, Settings.VacationApiUrl);
+            return SendRequest<IEnumerable<VacationDto>>(request);
+        }
+
+        public Task<VacationDto> GetVacationAsync(string id)
+        {
+            var requestUri = Settings.VacationApiUrl + $"/{id}";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            return SendRequest<VacationDto>(request);
+        }
+
+        public async Task<T> SendRequest<T>(HttpRequestMessage request)
+        {
             var response = await _client.SendAsync(request);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -32,19 +43,9 @@ namespace VacationsTracker.Core.Data
             }
 
             var content = await response.Content.ReadAsStringAsync();
-            var vacancies = JsonConvert.DeserializeObject<BaseServerResponse<VacationDto>>(content);
+            var vacancy = JsonConvert.DeserializeObject<BaseServerResponse<T>>(content);
 
-            return vacancies.Result;
-        }
-
-        public class BaseServerResponse<T>
-        {
-            [JsonProperty("result")]
-            public List<T> Result { get; set; }
-            [JsonProperty("code")]
-            public int Code { get; set; }
-            [JsonProperty("message")]
-            public object Message { get; set; }
+            return vacancy.Result;
         }
     }
 }

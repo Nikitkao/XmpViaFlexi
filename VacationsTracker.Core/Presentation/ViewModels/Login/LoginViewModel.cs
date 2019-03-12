@@ -24,7 +24,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
         private string _password;
         private string _errorMessage;
 
-        public ICommand LoginCommand => CommandProvider.GetForAsync(OnLogin);
+        public ICommand LoginCommand => CommandProvider.GetForAsync(OnLogin, () => !Busy);
 
         public LoginViewModel(INavigationService navigationService, IUserRepository userRepository, IOperationFactory operationFactory) : base(operationFactory)
         {

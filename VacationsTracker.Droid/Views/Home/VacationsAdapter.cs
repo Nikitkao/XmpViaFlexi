@@ -3,7 +3,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using FlexiMvvm.Collections;
 
-namespace VacationsTracker.Droid.Views.MainList
+namespace VacationsTracker.Droid.Views.Home
 {
     internal class VacationsAdapter : RecyclerViewObservablePlainAdapterBase
     {

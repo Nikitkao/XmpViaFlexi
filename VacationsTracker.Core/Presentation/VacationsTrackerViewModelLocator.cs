@@ -4,6 +4,7 @@ using FlexiMvvm.Operations;
 using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Presentation.ViewModels;
+using VacationsTracker.Core.Presentation.ViewModels.Details;
 using VacationsTracker.Core.Presentation.ViewModels.Home;
 using VacationsTracker.Core.Presentation.ViewModels.Login;
 
@@ -28,6 +29,9 @@ namespace VacationsTracker.Core.Presentation
                 _dependencyProvider.Get<IOperationFactory>()));
             factory.Register(() => new HomeViewModel(_dependencyProvider.Get<INavigationService>(),
                 _dependencyProvider.Get<IVacationRepository>(), _dependencyProvider.Get<IOperationFactory>()));
+            factory.Register(() => new DetailsViewModel(_dependencyProvider.Get<INavigationService>(),
+           _dependencyProvider.Get<IVacationRepository>(), _dependencyProvider.Get<IOperationFactory>()));
+           factory.Register(() => new VacationTypeItemViewModel());
         }
     }
 }

@@ -3,6 +3,6 @@ namespace VacationsTracker.Core.Data
 {
     public enum VacationType
     {
-        Undefined, Regular, Sick, Exceptional, LeaveWithoutPay, Overtime
+        Regular = 1, Sick, Exceptional, LeaveWithoutPay, Overtime
     }
 }

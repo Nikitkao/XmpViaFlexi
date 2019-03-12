@@ -65,12 +65,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\CustomBindings.cs" />
     <Compile Include="Views\Details\DetailsActivity.cs" />
+    <Compile Include="Views\Details\VacationTypeFragment.cs" />
     <Compile Include="Views\Login\LoginActivity.cs" />
     <Compile Include="Views\Home\HomeActivity.cs" />
     <Compile Include="Views\Home\VacationCellViewHolder.cs" />
     <Compile Include="Views\Home\VacationsAdapter.cs" />
     <Compile Include="Views\SplashScreenActivity.cs" />
     <Compile Include="Views\ValueConverters\ImageValueConverter.cs" />
+    <Compile Include="Views\ValueConverters\RadioGroupValueConverter.cs" />
+    <Compile Include="Views\ValueConverters\TypeToPagerItemValueConverter.cs" />
     <Compile Include="Views\ViewHolderGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +106,15 @@
     <AndroidResource Include="Resources\layout\cell_vacation.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_details.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_vacation_type.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable\tab_indicator_selected.xml" />
+    <AndroidResource Include="Resources\drawable\tab_indicator_default.xml" />
+    <AndroidResource Include="Resources\drawable\tab_selector.xml" />
     <Content Include="Views\ViewHolderGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ViewHolderGenerator.cs</LastGenOutput>
@@ -167,34 +179,31 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash.jpg" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\splash.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Avatar_Ark.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Avatar_Ark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon_Request_Blue.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon_Request_Blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon_Request_Dark.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon_Request_Dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon_Request_Gray.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon_Request_Gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon_Request_Green.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon_Request_Green.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon_Request_Plum.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon_Request_Plum.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Login_bg.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\material_add_white.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\material_add_white.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

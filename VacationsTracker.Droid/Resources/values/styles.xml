@@ -92,7 +92,6 @@
   <style name="VacationDurationStyle">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
-  <!-- <item name="android:textAppearance">?android:attr/textAppearanceListItem</item> -->
     <item name="android:textColor">@color/colorLightBlue</item>
   </style>
   <style name="SeparatorStyle">
@@ -110,5 +109,49 @@
     <item name="android:layout_centerInParent">true</item>
     <item name="android:paddingRight">@dimen/Inset1x</item>
     <item name="android:textColor">@android:color/darker_gray</item>
+  </style>
+  <style name="LightBlueSeparatorStyle" parent="SeparatorStyle">
+    <item name="android:background">@color/colorLightBlue</item>
+  </style>
+  <style name="VacationDayBaseStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:gravity">center|top</item>
+    <item name="android:textSize">@dimen/VacationDayDefaultHeight</item>
+  </style>
+  <style name="VacationStartDayStyle" parent="VacationDayBaseStyle">
+    <item name="android:textColor">@color/colorLightBlue</item>
+  </style>
+  <style name="VacationEndDayStyle" parent="VacationDayBaseStyle">
+    <item name="android:textColor">@color/colorLightGreen</item>
+  </style>
+  <style name="VacationMonthBaseStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/VacationMonthDefaultHeight</item>
+  </style>
+  <style name="VacationStartMonthStyle" parent="VacationMonthBaseStyle">
+    <item name="android:textColor">@color/colorLightBlue</item>
+  </style>
+  <style name="VacationEndMonthStyle" parent="VacationMonthBaseStyle">
+    <item name="android:textColor">@color/colorLightGreen</item>
+  </style>
+  <style name="VacationYearBaseStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/VacationYearDefaultHeight</item>
+  </style>
+  <style name="VacationStartYearStyle" parent="VacationYearBaseStyle">
+    <item name="android:textColor">@color/colorLightBlue</item>
+  </style>
+  <style name="VacationEndYearStyle" parent="VacationYearBaseStyle">
+    <item name="android:textColor">@color/colorLightGreen</item>
+  </style>
+  <style name="RadioButtonStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_margin">@dimen/Inset1x</item>
+    <item name="android:buttonTint">@color/colorLightGreen</item>
+    <item name="android:paddingLeft">@dimen/InsetHalf</item>
   </style>
 </resources>

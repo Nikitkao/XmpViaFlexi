@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:background="@android:color/white"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" >
+  <RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="40dp"
+    android:background="@color/colorAccent"  >
+    <TextView
+      android:id="@+id/nav_title"
+	  android:textColor="@android:color/white"
+	  android:text="@string/details_page_title"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:layout_centerInParent="true" />
+  </RelativeLayout>
+  <ProgressBar
+    android:id="@+id/ctrlActivityIndicator"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:indeterminateOnly="true"
+    android:layout_gravity="center" />
+  <LinearLayout
+    android:id="@+id/root_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <android.support.v4.view.ViewPager
+      android:id="@+id/vacation_type_pager"
+      android:layout_width="match_parent"
+      android:layout_height="110dp" />
+    <android.support.design.widget.TabLayout
+      android:id="@+id/tab_dots"
+      android:layout_alignParentBottom="true"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:tabIndicatorHeight="0dp"
+      app:tabBackground="@drawable/tab_selector"
+	  app:tabGravity="center"/>
+    <View 
+      style="@style/LightBlueSeparatorStyle" />
+    <RelativeLayout
+      android:id="@+id/date_start"
+	  android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/Inset2x">
+      <RelativeLayout
+        android:id="@+id/date_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+          android:id="@+id/vacation_start_day"
+          android:layout_alignParentLeft="true"
+          style="@style/VacationStartDayStyle"/>
+        <TextView
+          android:id="@+id/vacation_start_month"
+          android:layout_marginTop="@dimen/Inset1x"
+          android:layout_alignTop="@id/vacation_start_day"
+          android:layout_toRightOf="@id/vacation_start_day"
+          style="@style/VacationStartMonthStyle"/>
+        <TextView
+          android:id="@+id/vacation_start_year"
+          android:layout_toRightOf="@id/vacation_start_day"
+          android:layout_alignBaseline="@id/vacation_start_day"
+          style="@style/VacationStartYearStyle"/>
+      </RelativeLayout>
+      <RelativeLayout
+        android:id="@+id/date_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+        <TextView
+          android:id="@+id/vacation_end_day"
+          android:gravity="center|top"
+          android:layout_alignParentLeft="true"
+          style="@style/VacationEndDayStyle"/>
+        <TextView
+          android:id="@+id/vacation_end_month"
+          android:layout_marginTop="@dimen/Inset1x"
+          android:layout_alignTop="@id/vacation_end_day"
+          android:layout_toRightOf="@id/vacation_end_day"
+          style="@style/VacationEndMonthStyle"/>
+        <TextView
+          android:id="@+id/vacation_end_year"
+          android:layout_alignBaseline="@id/vacation_end_day"				
+          android:layout_toRightOf="@id/vacation_end_day"
+          style="@style/VacationEndYearStyle"/>
+      </RelativeLayout>
+    </RelativeLayout>
+    <View 
+      style="@style/LightBlueSeparatorStyle" />
+    <RadioGroup
+      android:id="@+id/status_radio_group"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="center">
+      <RadioButton 
+        android:id="@+id/approved_radio"
+        android:text="@string/vacation_status_approved" 
+        style="@style/RadioButtonStyle"/>
+      <RadioButton 
+        android:id="@+id/closed_radio"
+        android:text="@string/vacation_status_closed"  
+        style="@style/RadioButtonStyle"/>
+    </RadioGroup>
+    <View 
+      style="@style/LightBlueSeparatorStyle" />
+  </LinearLayout>
+</LinearLayout>

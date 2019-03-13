@@ -13,6 +13,7 @@ namespace VacationsTracker.Droid.Views
          private readonly Activity activity;
 
          private TextView navTitle;
+         private Button saveButton;
          private ProgressBar ctrlActivityIndicator;
          private LinearLayout rootLayout;
          private Android.Support.V4.View.ViewPager vacationTypePager;
@@ -39,6 +40,10 @@ namespace VacationsTracker.Droid.Views
         
         public TextView NavTitle =>
             navTitle ?? (navTitle = activity.FindViewById<TextView>(Resource.Id.nav_title));
+
+        
+        public Button SaveButton =>
+            saveButton ?? (saveButton = activity.FindViewById<Button>(Resource.Id.save_button));
 
         
         public ProgressBar CtrlActivityIndicator =>

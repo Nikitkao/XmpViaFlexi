@@ -7,5 +7,7 @@ namespace VacationsTracker.Core.Data
     {
         Task<IEnumerable<VacationDto>> GetVacationsAsync();
         Task<VacationDto> GetVacationAsync(string id);
+        Task AddOrUpdateAsync(VacationDto vacation);
+        Task DeleteAsync(string id);
     }
 }

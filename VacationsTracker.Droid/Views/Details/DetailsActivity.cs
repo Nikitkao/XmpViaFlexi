@@ -1,11 +1,13 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
+using Android.Widget;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Collections;
 using FlexiMvvm.ValueConverters;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.V7;
+using FlexiMvvm.Weak.Subscriptions;
 using VacationsTracker.Core.Presentation.ValueConverters;
 using VacationsTracker.Core.Presentation.ViewModels.Details;
 using VacationsTracker.Droid.Views.ValueConverters;
@@ -23,16 +25,42 @@ namespace VacationsTracker.Droid.Views.Details
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
             SetContentView(Resource.Layout.activity_details);
-
-            //var test1View = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            //var test1TextView = (TextView)test1View.FindViewById(Resource.Id.nav_title);
-            //test1TextView.Text = "Request";
-
+            
             ViewHolder = new DetailsActivityViewHolder(this);
             SetTypePagerAdapter();
             SetPagerBottomDots();
+            
+            var startClick = new WeakEventSubscription<RelativeLayout>(ViewHolder.DateStart,
+                (button, handler) => button.Click += handler,
+                (button, handler) => button.Click -= handler, DateStartOnClick);
+            var endClick = new WeakEventSubscription<RelativeLayout>(ViewHolder.DateEnd,
+                (button, handler) => button.Click += handler,
+                (button, handler) => button.Click -= handler, DateEndOnClick);
+        }
+
+        private void DateStartOnClick(object sender, EventArgs e)
+        {
+            var picker = new DatePickerDialog(this, CallBackStart, ViewModel.StartDate.Year,
+                ViewModel.StartDate.Month - 1, ViewModel.StartDate.Day);
+            picker.Show();
+        }
+
+        private void CallBackStart(object sender, DatePickerDialog.DateSetEventArgs e)
+        {
+            ViewModel.StartDate = e.Date;
+        }
+
+        private void DateEndOnClick(object sender, EventArgs e)
+        {
+            var picker = new DatePickerDialog(this, CallBackEnd, ViewModel.EndDate.Year,
+                ViewModel.EndDate.Month - 1, ViewModel.EndDate.Day);
+            picker.Show();
+        }
+
+        private void CallBackEnd(object sender, DatePickerDialog.DateSetEventArgs e)
+        {
+            ViewModel.EndDate = e.Date;
         }
 
         private void SetTypePagerAdapter()
@@ -120,6 +148,10 @@ namespace VacationsTracker.Droid.Views.Details
                 .For(v => v.Visibility)
                 .To(vm => vm.Busy)
                 .WithConvertion<VisibleGoneVisibilityValueConverter>();
+
+            bindingSet.Bind(ViewHolder.SaveButton)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.SaveCommand);
         }
     }
 }

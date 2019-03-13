@@ -35,14 +35,14 @@ namespace VacationsTracker.Core.DataAccess
             return vacationDto.ToVacation();
         }
 
-        public Task UpsertVacationAsync(VacationCellViewModel vacationViewModel, CancellationToken token = default)
+        public Task AddOrUpdateAsync(Vacation vacation, CancellationToken token = default)
         {
-            throw new System.NotImplementedException();
+            return _vacationsApi.AddOrUpdateAsync(vacation.ToVacationDto());
         }
 
         public Task DeleteVacationAsync(string id, CancellationToken token = default)
         {
-            throw new System.NotImplementedException();
+            return _vacationsApi.DeleteAsync(id);
         }
     }
 }

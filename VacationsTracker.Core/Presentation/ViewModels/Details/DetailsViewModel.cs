@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FlexiMvvm;
 using FlexiMvvm.Collections;
+using FlexiMvvm.Commands;
 using FlexiMvvm.Operations;
 using VacationsTracker.Core.Data;
 using VacationsTracker.Core.DataAccess;
+using VacationsTracker.Core.Domain;
 using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Operations;
@@ -19,11 +22,37 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         private readonly INavigationService _navigationService;
 
         private string _vacationId;
+        private string _createdBy;
+        private DateTime _created;
         private bool _busy;
         private DateTime _startDate;
         private DateTime _endDate;
         private VacationType _type;
         private VacationStatus _status;
+
+        public ICommand SaveCommand => CommandProvider.GetForAsync(OnSave, () => !Busy);
+
+        private async Task OnSave()
+        {
+            if(StartDate > EndDate)
+                return;
+            await OperationFactory
+                .CreateOperation(OperationContext)
+                .WithInternetConnectionCondition()
+                .WithLoadingNotification()
+                .WithExpressionAsync(token =>
+                {
+                    var vac = new Vacation(_vacationId, StartDate, EndDate, Status, Type, _created, _createdBy);
+                    return _vacationsRepository.AddOrUpdateAsync(vac, token);
+                })
+                .OnSuccess(_ =>
+                {
+                   
+                })
+                .OnError<InternetConnectionException>(_ => Debug.WriteLine("Connection Exception"))
+                .OnError<Exception>(error => Debug.WriteLine(error.Exception))
+                .ExecuteAsync();
+        }
 
         public bool Busy
         {
@@ -72,8 +101,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
 
         protected override async Task InitializeAsync(VacationDetailsParameters parameters)
         {
-            Busy = true;
-
             await base.InitializeAsync(parameters);
 
             await OperationFactory
@@ -87,8 +114,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 })
                 .OnSuccess(vacation =>
                 {
-                    (_vacationId, StartDate, EndDate, Status, Type) = vacation;
-                    Busy = false;
+                    (_vacationId, StartDate, EndDate, Status, Type, _created, _createdBy) = vacation;
                 })
                 .OnError<InternetConnectionException>(_ => { })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))

@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VacationsTracker.Core.Domain;
-using VacationsTracker.Core.Presentation.ViewModels;
 
 namespace VacationsTracker.Core.DataAccess
 {
@@ -12,7 +11,7 @@ namespace VacationsTracker.Core.DataAccess
 
         Task<Vacation> GetVacationAsync(string id, CancellationToken token = default);
 
-        Task UpsertVacationAsync(VacationCellViewModel vacationViewModel, CancellationToken token = default);
+        Task AddOrUpdateAsync(Vacation vacationViewModel, CancellationToken token = default);
         
         Task DeleteVacationAsync(string id, CancellationToken token = default);
     }

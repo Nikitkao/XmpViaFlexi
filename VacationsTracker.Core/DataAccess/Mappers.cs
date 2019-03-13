@@ -7,15 +7,28 @@ namespace VacationsTracker.Core.DataAccess
     {
         public static Vacation ToVacation(this VacationDto vacationDto)
         {
-            return new Vacation()
+            return new Vacation(
+                vacationDto.Id,
+                vacationDto.Start,
+                vacationDto.End,
+                vacationDto.VacationStatus,
+                vacationDto.VacationType,
+                vacationDto.Created,
+                vacationDto.CreatedBy
+            );
+        }
+
+        public static VacationDto ToVacationDto(this Vacation vacation)
+        {
+            return new VacationDto()
             {
-                Id = vacationDto.Id,
-                Start = vacationDto.Start,
-                End = vacationDto.End,
-                VacationStatus = vacationDto.VacationStatus,
-                VacationType = vacationDto.VacationType,
-                Created = vacationDto.Created,
-                CreatedBy = vacationDto.CreatedBy,
+                Id = vacation.Id,
+                Start = vacation.Start,
+                End = vacation.End,
+                VacationStatus = vacation.VacationStatus,
+                VacationType = vacation.VacationType,
+                Created = vacation.Created,
+                CreatedBy = vacation.CreatedBy,
             };
         }
     }

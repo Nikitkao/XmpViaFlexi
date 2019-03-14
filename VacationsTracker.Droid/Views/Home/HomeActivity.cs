@@ -27,9 +27,7 @@ namespace VacationsTracker.Droid.Views.Home
 
             var menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
 
-            var subscribtion = new WeakEventSubscription<ImageButton>(menuButton,
-                (button, handler) => button.Click += handler,
-                (button, handler) => button.Click -= handler, ButtonClickHandler);
+            menuButton.ClickWeakSubscribe(ButtonClickHandler);
 
             SetupRecyclerView();
         }
@@ -59,6 +57,7 @@ namespace VacationsTracker.Droid.Views.Home
         public override void Bind(BindingSet<HomeViewModel> bindingSet)
         {
             base.Bind(bindingSet);
+
             bindingSet.Bind(VacationsAdapter)
                 .For(v => v.ItemClickedBinding())
                 .To(vm => vm.VacationSelectedCommand);

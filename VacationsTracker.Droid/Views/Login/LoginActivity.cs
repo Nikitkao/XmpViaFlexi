@@ -11,6 +11,7 @@ namespace VacationsTracker.Droid.Views
     public class LoginActivity : FlxBindableAppCompatActivity<LoginViewModel>
     {
         private LoginActivityViewHolder ViewHolder { get; set; }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

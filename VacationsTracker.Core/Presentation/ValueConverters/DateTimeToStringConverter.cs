@@ -9,6 +9,7 @@ namespace VacationsTracker.Core.Presentation.ValueConverters
         protected override ConversionResult<string> Convert(DateTime value, Type targetType, object parameter, CultureInfo culture)
         {
             var s = value.ToString(parameter?.ToString(), CultureInfo.InvariantCulture);
+
             return ConversionResult<string>.SetValue(s);
         }
     }

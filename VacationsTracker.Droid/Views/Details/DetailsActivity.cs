@@ -25,9 +25,11 @@ namespace VacationsTracker.Droid.Views.Details
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             SetContentView(Resource.Layout.activity_details);
             
             ViewHolder = new DetailsActivityViewHolder(this);
+
             SetTypePagerAdapter();
             SetPagerBottomDots();
             
@@ -41,26 +43,26 @@ namespace VacationsTracker.Droid.Views.Details
 
         private void DateStartOnClick(object sender, EventArgs e)
         {
-            var picker = new DatePickerDialog(this, CallBackStart, ViewModel.StartDate.Year,
-                ViewModel.StartDate.Month - 1, ViewModel.StartDate.Day);
+            var picker = new DatePickerDialog(this, CallBackStart, ViewModel.Start.Year,
+                ViewModel.Start.Month - 1, ViewModel.Start.Day);
             picker.Show();
         }
 
         private void CallBackStart(object sender, DatePickerDialog.DateSetEventArgs e)
         {
-            ViewModel.StartDate = e.Date;
+            ViewModel.Start = e.Date;
         }
 
         private void DateEndOnClick(object sender, EventArgs e)
         {
-            var picker = new DatePickerDialog(this, CallBackEnd, ViewModel.EndDate.Year,
-                ViewModel.EndDate.Month - 1, ViewModel.EndDate.Day);
+            var picker = new DatePickerDialog(this, CallBackEnd, ViewModel.End.Year,
+                ViewModel.End.Month - 1, ViewModel.End.Day);
             picker.Show();
         }
 
         private void CallBackEnd(object sender, DatePickerDialog.DateSetEventArgs e)
         {
-            ViewModel.EndDate = e.Date;
+            ViewModel.End = e.Date;
         }
 
         private void SetTypePagerAdapter()
@@ -90,6 +92,7 @@ namespace VacationsTracker.Droid.Views.Details
 
                 return fragment;
             }
+
             throw new NotSupportedException(nameof(arg));
         }
 
@@ -101,42 +104,42 @@ namespace VacationsTracker.Droid.Views.Details
                 
             bindingSet.Bind(ViewHolder.VacationStartDay)
                 .For(v => v.Text)
-                .To(vm => vm.StartDate)
+                .To(vm => vm.Start)
                 .WithConvertion<DateTimeToStringConverter>("dd");
 
             bindingSet.Bind(ViewHolder.VacationStartMonth)
                 .For(v => v.Text)
-                .To(vm => vm.StartDate)
+                .To(vm => vm.Start)
                 .WithConvertion<DateTimeToStringConverter>("MMM");
 
             bindingSet.Bind(ViewHolder.VacationStartYear)
                 .For(v => v.Text)
-                .To(vm => vm.StartDate)
+                .To(vm => vm.Start)
                 .WithConvertion<DateTimeToStringConverter>("yyyy");
 
             bindingSet.Bind(ViewHolder.VacationEndDay)
                 .For(v => v.Text)
-                .To(vm => vm.EndDate)
+                .To(vm => vm.End)
                 .WithConvertion<DateTimeToStringConverter>("dd");
 
             bindingSet.Bind(ViewHolder.VacationEndMonth)
                 .For(v => v.Text)
-                .To(vm => vm.EndDate)
+                .To(vm => vm.End)
                 .WithConvertion<DateTimeToStringConverter>("MMM");
 
             bindingSet.Bind(ViewHolder.VacationEndYear)
                 .For(v => v.Text)
-                .To(vm => vm.EndDate)
+                .To(vm => vm.End)
                 .WithConvertion<DateTimeToStringConverter>("yyyy");
 
             bindingSet.Bind(ViewHolder.VacationTypePager)
                 .For(v => v.SetCurrentItemAndPageSelectedBinding())
-                .To(vm => vm.Type)
+                .To(vm => vm.VacationType)
                 .WithConvertion<TypeToPagerItemValueConverter>();
 
             bindingSet.Bind(ViewHolder.StatusRadioGroup)
                 .For(v => v.CheckAndCheckedChangeBinding())
-                .To(vm => vm.Status)
+                .To(vm => vm.VacationStatus)
                 .WithConvertion<RadioGroupValueConverter>();
 
             bindingSet.Bind(ViewHolder.RootLayout)

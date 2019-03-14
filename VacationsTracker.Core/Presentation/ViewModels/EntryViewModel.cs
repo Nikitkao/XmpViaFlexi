@@ -22,9 +22,13 @@ namespace VacationsTracker.Core.Presentation.ViewModels
             var token = await _secureStorage.GetAsync(Settings.TokenStorageKey);
 
             if (string.IsNullOrEmpty(token))
+            {
                 _navigationService.NavigateToLogin(this);
+            }
             else
+            {
                 _navigationService.NavigateToHome(this);
+            }
         }
     }
 }

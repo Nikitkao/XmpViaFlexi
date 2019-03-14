@@ -57,7 +57,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
 
         private Task LoadVacations()
         {
-            Busy = true;
             return OperationFactory
                 .CreateOperation(OperationContext)
                 .WithInternetConnectionCondition()
@@ -73,7 +72,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
                     }
 
                     RefreshedDateTime = DateTime.Now;
-                    Busy = false;
                 })
                 .OnError<InternetConnectionException>(_ => { })
                 .OnError<AuthenticationException>(ex => Debug.WriteLine(ex))

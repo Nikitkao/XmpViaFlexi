@@ -24,6 +24,7 @@ namespace VacationsTracker.Core.Data
         public Task<IEnumerable<VacationDto>> GetVacationsAsync()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, Settings.VacationApiUrl);
+
             return SendRequest<IEnumerable<VacationDto>>(request);
         }
 
@@ -31,6 +32,7 @@ namespace VacationsTracker.Core.Data
         {
             var requestUri = Settings.VacationApiUrl + $"/{id}";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+
             return SendRequest<VacationDto>(request);
         }
 
@@ -40,6 +42,7 @@ namespace VacationsTracker.Core.Data
             var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
             var serializedObject = JsonConvert.SerializeObject(vacation);
             request.Content = new StringContent(serializedObject, Encoding.UTF8, "application/json");
+
             return SendRequest<VacationDto>(request);
         }
 
@@ -47,6 +50,7 @@ namespace VacationsTracker.Core.Data
         {
             var requestUri = Settings.VacationApiUrl + $"/{id}";
             var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
+
             return SendRequest<VacationDto>(request);
         }
 

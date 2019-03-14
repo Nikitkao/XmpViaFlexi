@@ -32,6 +32,7 @@ namespace VacationsTracker.Core.DataAccess
         public async Task<Vacation> GetVacationAsync(string id, CancellationToken token = default)
         {
             var vacationDto = await _vacationsApi.GetVacationAsync(id);
+
             return vacationDto.ToVacation();
         }
 

@@ -26,7 +26,11 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
 
         public ICommand LoginCommand => CommandProvider.GetForAsync(OnLogin, () => !Busy);
 
-        public LoginViewModel(INavigationService navigationService, IUserRepository userRepository, IOperationFactory operationFactory) : base(operationFactory)
+        public LoginViewModel(
+            INavigationService navigationService,
+            IUserRepository userRepository,
+            IOperationFactory operationFactory)
+            : base(operationFactory)
         {
             _navigationService = navigationService;
             _userRepository = userRepository;
@@ -80,6 +84,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
                 {
                     var user = new User(Login, Password);
                     user.ValidateCredentials();
+
                     return _userRepository.AuthorizeAsync(user, token);
                 })
                 .OnSuccess(() => _navigationService.NavigateToHome(this))
@@ -87,11 +92,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
                 .OnError<EmptyPasswordException>(_ => SetError(Strings.LoginPage_InvalidPassword))
                 .OnError<EmptyLoginException>(_ => SetError(Strings.LoginPage_InvalidLogin))
                 .OnError<InternetConnectionException>(_ => SetError(Strings.LoginPage_NoInternet))
-                .OnError<Exception>(
-                    error =>
-                    {
-                        SetError(Strings.LoginPage_UnknownError);
-                    })
+                .OnError<Exception>(_ => SetError(Strings.LoginPage_UnknownError))
                 .ExecuteAsync();
         }
 

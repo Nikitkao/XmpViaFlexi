@@ -1557,9 +1557,6 @@ namespace VacationsTracker.Droid
 			// aapt resource value: 0x7f0700b3
 			public const int SeparatorDefaultThickness = 2131165363;
 			
-			// aapt resource value: 0x7f0700b9
-			public const int StatusBarHeight = 2131165369;
-			
 			// aapt resource value: 0x7f0700af
 			public const int TextEditDefaultHeight = 2131165359;
 			
@@ -1583,6 +1580,9 @@ namespace VacationsTracker.Droid
 			
 			// aapt resource value: 0x7f0700b6
 			public const int VacationMonthDefaultHeight = 2131165366;
+			
+			// aapt resource value: 0x7f0700b9
+			public const int VacationStatusBarHeight = 2131165369;
 			
 			// aapt resource value: 0x7f0700b7
 			public const int VacationYearDefaultHeight = 2131165367;

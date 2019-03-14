@@ -21,73 +21,14 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         private readonly IVacationRepository _vacationsRepository;
         private readonly INavigationService _navigationService;
 
-        private string _vacationId;
+        private string _id;
         private string _createdBy;
         private DateTime _created;
         private bool _busy;
-        private DateTime _startDate;
-        private DateTime _endDate;
-        private VacationType _type;
-        private VacationStatus _status;
-
-        public ICommand SaveCommand => CommandProvider.GetForAsync(OnSave, () => !Busy);
-
-        private async Task OnSave()
-        {
-            if(StartDate > EndDate)
-                return;
-            await OperationFactory
-                .CreateOperation(OperationContext)
-                .WithInternetConnectionCondition()
-                .WithLoadingNotification()
-                .WithExpressionAsync(token =>
-                {
-                    var vac = new Vacation(_vacationId, StartDate, EndDate, Status, Type, _created, _createdBy);
-                    return _vacationsRepository.AddOrUpdateAsync(vac, token);
-                })
-                .OnSuccess(_ =>
-                {
-                   
-                })
-                .OnError<InternetConnectionException>(_ => Debug.WriteLine("Connection Exception"))
-                .OnError<Exception>(error => Debug.WriteLine(error.Exception))
-                .ExecuteAsync();
-        }
-
-        public bool Busy
-        {
-            get => _busy;
-            set => Set(ref _busy, value);
-        }
-
-        public DateTime StartDate
-        {
-            get => _startDate;
-            set => Set(ref _startDate, value);
-        }
-
-        public DateTime EndDate
-        {
-            get => _endDate;
-            set => Set(ref _endDate, value);
-        }
-
-        public VacationType Type
-        {
-            get => _type;
-            set => Set(ref _type, value);
-        }
-        
-        public VacationStatus Status
-        {
-            get => _status;
-            set => Set(ref _status, value);
-        }
-
-        public RangeObservableCollection<VacationTypeItemParameters> VacationTypes { get; }
-            = new RangeObservableCollection<VacationTypeItemParameters>(
-                Enum.GetValues(typeof(VacationType))
-                    .Cast<VacationType>().Select(t => new VacationTypeItemParameters(t)));
+        private DateTime _start;
+        private DateTime _end;
+        private VacationType _vacationType;
+        private VacationStatus _vacationStatus;
 
         public DetailsViewModel(
             INavigationService navigationService,
@@ -97,6 +38,69 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         {
             _navigationService = navigationService;
             _vacationsRepository = vacationsRepository;
+        }
+
+        public ICommand SaveCommand => CommandProvider.GetForAsync(OnSave, () => !Busy);
+
+        public bool Busy
+        {
+            get => _busy;
+            set => Set(ref _busy, value);
+        }
+
+        public DateTime Start
+        {
+            get => _start;
+            set => Set(ref _start, value);
+        }
+
+        public DateTime End
+        {
+            get => _end;
+            set => Set(ref _end, value);
+        }
+
+        public VacationType VacationType
+        {
+            get => _vacationType;
+            set => Set(ref _vacationType, value);
+        }
+        
+        public VacationStatus VacationStatus
+        {
+            get => _vacationStatus;
+            set => Set(ref _vacationStatus, value);
+        }
+
+        public RangeObservableCollection<VacationTypeItemParameters> VacationTypes { get; }
+            = new RangeObservableCollection<VacationTypeItemParameters>(
+                Enum.GetValues(typeof(VacationType))
+                    .Cast<VacationType>().Select(t => new VacationTypeItemParameters(t)));
+
+        private async Task OnSave()
+        {
+            if (Start > End)
+                return;
+            await OperationFactory
+                .CreateOperation(OperationContext)
+                .WithInternetConnectionCondition()
+                .WithLoadingNotification()
+                .WithExpressionAsync(token =>
+                {
+                    var vac = new Vacation(
+                        _id,
+                        Start,
+                        End,
+                        VacationStatus,
+                        VacationType,
+                        _created,
+                        _createdBy);
+                    return _vacationsRepository.AddOrUpdateAsync(vac, token);
+                })
+                .OnSuccess(_ => {})
+                .OnError<InternetConnectionException>(_ => Debug.WriteLine("Connection Exception"))
+                .OnError<Exception>(error => Debug.WriteLine(error.Exception))
+                .ExecuteAsync();
         }
 
         protected override async Task InitializeAsync(VacationDetailsParameters parameters)
@@ -114,7 +118,13 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 })
                 .OnSuccess(vacation =>
                 {
-                    (_vacationId, StartDate, EndDate, Status, Type, _created, _createdBy) = vacation;
+                    _id = vacation.Id;
+                    Start = vacation.Start;
+                    End = vacation.End;
+                    VacationStatus = vacation.VacationStatus;
+                    VacationType = vacation.VacationType;
+                    _created = vacation.Created;
+                    _createdBy = vacation.CreatedBy;
                 })
                 .OnError<InternetConnectionException>(_ => { })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))

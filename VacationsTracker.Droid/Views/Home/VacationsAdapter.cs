@@ -9,7 +9,11 @@ namespace VacationsTracker.Droid.Views.Home
     {
         protected override RecyclerViewObservableViewHolder OnCreateItemViewHolder([NonNullAttribute] ViewGroup parent, int viewType)
         {
-            var itemView = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.cell_vacation, parent, false);
+            var itemView = LayoutInflater.From(parent.Context).Inflate(
+                Resource.Layout.cell_vacation,
+                parent,
+                false);
+
             return new VacationCellViewHolder(itemView);
         }
 

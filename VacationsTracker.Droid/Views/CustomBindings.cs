@@ -11,15 +11,6 @@ namespace VacationsTracker.Droid.Views
 {
     public static class CustomBindings
     {
-        public static IDisposable ClickWeakSubscribe(this ImageButton button, EventHandler onClick)
-        {
-            return new WeakEventSubscription<ImageButton>(
-                button,
-                (btn, handler) => btn.Click += handler,
-                (btn, handler) => btn.Click -= handler,
-                onClick);
-        }
-
         public static TargetItemBinding<ImageView, int> SetImageResourceBinding(
             this IItemReference<ImageView> imageViewReference)
         {

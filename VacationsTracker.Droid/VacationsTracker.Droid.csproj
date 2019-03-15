@@ -71,6 +71,7 @@
     <Compile Include="Views\Home\VacationCellViewHolder.cs" />
     <Compile Include="Views\Home\VacationsAdapter.cs" />
     <Compile Include="Views\SplashScreenActivity.cs" />
+    <Compile Include="Views\SubscribtionExtensions.cs" />
     <Compile Include="Views\ValueConverters\ImageValueConverter.cs" />
     <Compile Include="Views\ValueConverters\RadioGroupValueConverter.cs" />
     <Compile Include="Views\ValueConverters\TypeToPagerItemValueConverter.cs" />

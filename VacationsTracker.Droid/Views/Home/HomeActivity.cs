@@ -5,8 +5,8 @@ using Android.Support.V4.View;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using FlexiMvvm.Bindings;
+using FlexiMvvm.Views;
 using FlexiMvvm.Views.V7;
-using FlexiMvvm.Weak.Subscriptions;
 using VacationsTracker.Core.Presentation.ViewModels.Home;
 
 namespace VacationsTracker.Droid.Views.Home

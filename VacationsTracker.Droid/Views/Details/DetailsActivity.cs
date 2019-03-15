@@ -32,13 +32,9 @@ namespace VacationsTracker.Droid.Views.Details
 
             SetTypePagerAdapter();
             SetPagerBottomDots();
-            
-            var startClick = new WeakEventSubscription<RelativeLayout>(ViewHolder.DateStart,
-                (button, handler) => button.Click += handler,
-                (button, handler) => button.Click -= handler, DateStartOnClick);
-            var endClick = new WeakEventSubscription<RelativeLayout>(ViewHolder.DateEnd,
-                (button, handler) => button.Click += handler,
-                (button, handler) => button.Click -= handler, DateEndOnClick);
+
+            ViewHolder.DateStart.ClickWeakSubscribe(DateStartOnClick);
+            ViewHolder.DateEnd.ClickWeakSubscribe(DateEndOnClick);
         }
 
         private void DateStartOnClick(object sender, EventArgs e)

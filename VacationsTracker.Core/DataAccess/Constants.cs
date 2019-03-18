@@ -1,7 +1,7 @@
 ﻿
 namespace VacationsTracker.Core.DataAccess
 {
-    internal class Settings
+    internal class Constants
     {
         public const string TokenStorageKey = "token_id";
         

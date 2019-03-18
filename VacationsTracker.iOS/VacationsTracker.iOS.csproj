@@ -24,6 +24,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -86,6 +88,12 @@
     <Content Include="Entitlements.plist" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <None Include="packages.config" />
+    <Compile Include="Views\Home\VacationItemViewCell.cs" />
+    <Compile Include="Views\Home\VacationItemView.cs" />
+    <Compile Include="Themes\AppDimens.cs" />
+    <Compile Include="Themes\AppStyle.cs" />
+    <Compile Include="Themes\AppColors.cs" />
+    <Compile Include="Views\ValueConverters\TypeToImageValueConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.FluentLayouts.Touch, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -119,6 +127,12 @@
       <HintPath>..\packages\Xamarin.Essentials.1.0.1\lib\xamarinios10\Xamarin.Essentials.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="IdentityModel">
+      <HintPath>..\packages\IdentityModel.3.10.6\lib\netstandard2.0\IdentityModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -166,6 +180,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
+    <Folder Include="Themes\" />
+    <Folder Include="Views\ValueConverters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VacationsTracker.Core\VacationsTracker.Core.csproj">

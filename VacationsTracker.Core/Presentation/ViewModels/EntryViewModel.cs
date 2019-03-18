@@ -19,7 +19,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels
         {
             base.Initialize();
 
-            var token = await _secureStorage.GetAsync(Settings.TokenStorageKey);
+            var token = await _secureStorage.GetAsync(Constants.TokenStorageKey);
 
             if (string.IsNullOrEmpty(token))
             {

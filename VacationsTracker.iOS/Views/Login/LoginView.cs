@@ -27,16 +27,17 @@ namespace VacationsTracker.iOS.Views.Login
             LoginTextFiled = new UITextField
             {
                 Placeholder = "Login",
-                BackgroundColor = UIColor.White
-                
+                BackgroundColor = UIColor.White,
+                AutocapitalizationType = UITextAutocapitalizationType.None,
+                SpellCheckingType = UITextSpellCheckingType.No
             };
 
             PasswordTextField = new UITextField()
             {
                 Placeholder = "Password",
                 BackgroundColor = UIColor.White,
-                
-
+                AutocapitalizationType = UITextAutocapitalizationType.None,
+                SpellCheckingType = UITextSpellCheckingType.No
             };
 
             LoginButton = new UIButton();

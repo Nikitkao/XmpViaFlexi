@@ -1,4 +1,5 @@
-﻿using System.Security.Authentication;
+﻿using System;
+using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
@@ -17,34 +18,42 @@ namespace VacationsTracker.Core.DataAccess
 
         public async Task AuthorizeAsync(User user, CancellationToken token = default)
         {
-            var discoveryClient = new DiscoveryClient(Settings.IdentityServiceUrl);
-
-            discoveryClient.Policy.RequireHttps = false;
-
-            var identityServer = await discoveryClient.GetAsync(token);
-
-            if (identityServer.IsError)
+            try
             {
-                throw new AuthenticationException();
+
+                var discoveryClient = new DiscoveryClient(Constants.IdentityServiceUrl);
+
+                discoveryClient.Policy.RequireHttps = false;
+
+                var identityServer = await discoveryClient.GetAsync(token);
+
+                if (identityServer.IsError)
+                {
+                    throw new AuthenticationException();
+                }
+
+                var authClient = new TokenClient(
+                    identityServer.TokenEndpoint,
+                    Constants.ClientId,
+                    Constants.ClientSecret);
+
+                var userTokenResponse = await authClient.RequestResourceOwnerPasswordAsync(
+                    user.Login,
+                    user.Password,
+                    Constants.Scope,
+                    cancellationToken: token);
+
+                if (userTokenResponse.IsError || userTokenResponse.AccessToken == null)
+                {
+                    throw new AuthenticationException();
+                }
+
+                await _storage.SetAsync(Constants.TokenStorageKey, userTokenResponse.AccessToken);
             }
-            
-            var authClient = new TokenClient(
-                identityServer.TokenEndpoint,
-                Settings.ClientId,
-                Settings.ClientSecret);
-
-            var userTokenResponse = await authClient.RequestResourceOwnerPasswordAsync(
-                user.Login,
-                user.Password,
-                Settings.Scope,
-                cancellationToken: token);
-
-            if (userTokenResponse.IsError || userTokenResponse.AccessToken == null)
+            catch(Exception ex)
             {
-                throw new AuthenticationException();
-            }
 
-            await _storage.SetAsync(Settings.TokenStorageKey, userTokenResponse.AccessToken);
+            }
         }
     }
 }

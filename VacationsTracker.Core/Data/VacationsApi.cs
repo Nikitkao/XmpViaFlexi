@@ -13,24 +13,27 @@ namespace VacationsTracker.Core.Data
     public class VacationsApi : IVacationApi
     {
         private readonly HttpClient _client;
+        private readonly ISecureStorage _storage;
+
 
         public VacationsApi(ISecureStorage storage)
         {
-            var token = storage.GetAsync(Settings.TokenStorageKey).Result;
+            _storage = storage;
+            var token = _storage.GetAsync(Constants.TokenStorageKey).Result;
             _client = new HttpClient();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         public Task<IEnumerable<VacationDto>> GetVacationsAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, Settings.VacationApiUrl);
+            var request = new HttpRequestMessage(HttpMethod.Get, Constants.VacationApiUrl);
 
             return SendRequest<IEnumerable<VacationDto>>(request);
         }
 
         public Task<VacationDto> GetVacationAsync(string id)
         {
-            var requestUri = Settings.VacationApiUrl + $"/{id}";
+            var requestUri = Constants.VacationApiUrl + $"/{id}";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
 
             return SendRequest<VacationDto>(request);
@@ -38,7 +41,7 @@ namespace VacationsTracker.Core.Data
 
         public Task AddOrUpdateAsync(VacationDto vacation)
         {
-            var requestUri = Settings.VacationApiUrl;
+            var requestUri = Constants.VacationApiUrl;
             var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
             var serializedObject = JsonConvert.SerializeObject(vacation);
             request.Content = new StringContent(serializedObject, Encoding.UTF8, "application/json");
@@ -48,7 +51,7 @@ namespace VacationsTracker.Core.Data
 
         public Task DeleteAsync(string id)
         {
-            var requestUri = Settings.VacationApiUrl + $"/{id}";
+            var requestUri = Constants.VacationApiUrl + $"/{id}";
             var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
 
             return SendRequest<VacationDto>(request);
@@ -60,6 +63,7 @@ namespace VacationsTracker.Core.Data
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
+                _storage.Remove(Constants.TokenStorageKey);
                 throw new UnauthorizedAccessException();
             }
 

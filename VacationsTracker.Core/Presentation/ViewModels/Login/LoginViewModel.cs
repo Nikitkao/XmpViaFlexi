@@ -71,29 +71,29 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Login
             get => _busy;
             set => Set(ref _busy, value);
         }
-        
+
         private Task OnLogin()
         {
             ErrorVisibility = false;
 
-             return OperationFactory
-                .CreateOperation(OperationContext)
-                .WithLoadingNotification()
-                .WithInternetConnectionCondition()
-                .WithExpressionAsync(token =>
-                {
-                    var user = new User(Login, Password);
-                    user.ValidateCredentials();
+            return OperationFactory
+               .CreateOperation(OperationContext)
+               .WithLoadingNotification()
+               .WithInternetConnectionCondition()
+               .WithExpressionAsync(token =>
+               {
+                   var user = new User(Login, Password);
+                   user.ValidateCredentials();
 
-                    return _userRepository.AuthorizeAsync(user, token);
-                })
-                .OnSuccess(() => _navigationService.NavigateToHome(this))
-                .OnError<AuthenticationException>(_ => SetError(Strings.LoginPage_InvalidCredentials))
-                .OnError<EmptyPasswordException>(_ => SetError(Strings.LoginPage_InvalidPassword))
-                .OnError<EmptyLoginException>(_ => SetError(Strings.LoginPage_InvalidLogin))
-                .OnError<InternetConnectionException>(_ => SetError(Strings.LoginPage_NoInternet))
-                .OnError<Exception>(_ => SetError(Strings.LoginPage_UnknownError))
-                .ExecuteAsync();
+                   return _userRepository.AuthorizeAsync(user, token);
+               })
+               .OnSuccess(() => _navigationService.NavigateToHome(this))
+               .OnError<AuthenticationException>(_ => SetError(Strings.LoginPage_InvalidCredentials))
+               .OnError<EmptyPasswordException>(_ => SetError(Strings.LoginPage_InvalidPassword))
+               .OnError<EmptyLoginException>(_ => SetError(Strings.LoginPage_InvalidLogin))
+               .OnError<InternetConnectionException>(_ => SetError(Strings.LoginPage_NoInternet))
+               .OnError<Exception>(_ => SetError(Strings.LoginPage_UnknownError))
+               .ExecuteAsync();
         }
 
         private void SetError(string errorText)

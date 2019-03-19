@@ -5,7 +5,7 @@ namespace VacationsTracker.iOS.Themes
 {
     internal static class AppColors
     {
-        public static readonly UIColor LightBlueColor = UIColor.Blue;
+        public static readonly UIColor LightBlueColor = UIColor.Cyan;
 
         public static readonly UIColor ErrorTextColor = UIColor.Red;
 

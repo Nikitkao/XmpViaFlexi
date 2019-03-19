@@ -114,7 +114,7 @@ namespace VacationsTracker.iOS.Themes
             return picker;
         }
 
-        public static UILabel SetErrorLabelStyle(this UILabel label, string text)
+        public static UILabel SetErrorLabelStyle(this UILabel label, string text = null)
         {
             label.Text = text;
 
@@ -129,13 +129,15 @@ namespace VacationsTracker.iOS.Themes
             return label;
         }
 
-        public static UITextField SetDefaultTextFieldStyle(this UITextField textField, string placeholder = null)
+        public static UITextField SetPrimaryStyle(this UITextField textField, string placeholder = null)
         {
             if (placeholder != null)
             {
                 textField.Placeholder = placeholder;
             }
 
+            textField.AutocapitalizationType = UITextAutocapitalizationType.None;
+            textField.SpellCheckingType = UITextSpellCheckingType.No;
             textField.BackgroundColor = AppColors.WhiteColor;
             textField.SetLeftPaddingTo(5);
 

@@ -37,6 +37,10 @@ namespace VacationsTracker.iOS.Views.Login
                 .To(vm => vm.ErrorVisibility)
                 .WithConvertion<InvertValueConverter>();
 
+            bindingSet.Bind(View.ErrorMessage)
+                .For(v => v.Text)
+                .To(vm => vm.ErrorMessage);
+
             bindingSet.Bind(View.LoginTextFiled)
                 .For(v => v.TextAndEditingChangedBinding())
                 .To(vm => vm.Login);

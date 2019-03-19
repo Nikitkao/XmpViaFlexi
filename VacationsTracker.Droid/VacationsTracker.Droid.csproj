@@ -70,7 +70,6 @@
     <Compile Include="Views\SubscribtionExtensions.cs" />
     <Compile Include="Views\ValueConverters\ImageValueConverter.cs" />
     <Compile Include="Views\ValueConverters\RadioGroupValueConverter.cs" />
-    <Compile Include="Views\ValueConverters\TypeToPagerItemValueConverter.cs" />
     <Compile Include="Views\ViewHolderGenerator.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

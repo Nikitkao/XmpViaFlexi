@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Cirrious.FluentLayouts.Touch;
+﻿using Cirrious.FluentLayouts.Touch;
 using FlexiMvvm.Views;
-using Foundation;
 using UIKit;
 using VacationsTracker.iOS.Views.Home.VacationsTable;
 
@@ -20,7 +15,6 @@ namespace VacationsTracker.iOS.Views.Home
 
             BackgroundColor = UIColor.White;
 
-
             VacationsTableView = new UITableView();
             VacationsTableView.RegisterClassForCellReuse(
                 typeof(VacationItemViewCell),
@@ -28,8 +22,6 @@ namespace VacationsTracker.iOS.Views.Home
 
             VacationsTableView.RefreshControl = new UIRefreshControl();
 
-            VacationsTableView.BackgroundColor = UIColor.Brown;
-            //VacationsTableView.AllowsSelection = true;
             VacationsTableView.SeparatorStyle = UITableViewCellSeparatorStyle.None;
         }
 

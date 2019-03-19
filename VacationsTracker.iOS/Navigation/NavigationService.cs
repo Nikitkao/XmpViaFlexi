@@ -3,6 +3,7 @@ using FlexiMvvm.Navigation;
 using UIKit;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Presentation.ViewModels;
+using VacationsTracker.Core.Presentation.ViewModels.Details;
 using VacationsTracker.Core.Presentation.ViewModels.Home;
 using VacationsTracker.Core.Presentation.ViewModels.Login;
 using VacationsTracker.iOS.Views;
@@ -35,8 +36,8 @@ namespace VacationsTracker.iOS.Navigation
 
         public void NavigateToDetails(HomeViewModel fromViewModel, string vacationId)
         {
-            //var homeViewController = GetViewController<HomeViewModel, HomeViewController>(fromViewModel);
-            //homeViewController.NotNull().NavigationController.PushViewController(new DetailsViewController(parameters), true);
+            var homeViewController = GetViewController<HomeViewModel, HomeViewController>(fromViewModel);
+            homeViewController.NotNull().NavigationController.PushViewController(new DetailsViewController(new VacationDetailsParameters(vacationId)), true);
         }
     }
 }

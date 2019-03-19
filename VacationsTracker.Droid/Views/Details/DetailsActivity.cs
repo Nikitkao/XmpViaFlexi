@@ -131,7 +131,7 @@ namespace VacationsTracker.Droid.Views.Details
             bindingSet.Bind(ViewHolder.VacationTypePager)
                 .For(v => v.SetCurrentItemAndPageSelectedBinding())
                 .To(vm => vm.VacationType)
-                .WithConvertion<TypeToPagerItemValueConverter>();
+                .WithConvertion<VacationTypeToIntConverter>();
 
             bindingSet.Bind(ViewHolder.StatusRadioGroup)
                 .For(v => v.CheckAndCheckedChangeBinding())

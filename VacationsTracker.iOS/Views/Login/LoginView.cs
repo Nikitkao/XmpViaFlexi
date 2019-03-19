@@ -98,7 +98,6 @@ namespace VacationsTracker.iOS.Views.Login
                 LoginTextFiled.AtRightOf(this, 40));
 
             this.AddConstraints(
-
                 ErrorMessage.Above(LoginTextFiled, 20),
                 //ErrorMessage.Height().EqualTo(60),
                 ErrorMessage.AtLeftOf(this, 40),

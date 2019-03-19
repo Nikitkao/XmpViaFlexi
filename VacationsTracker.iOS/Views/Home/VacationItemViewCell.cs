@@ -32,7 +32,7 @@ namespace VacationsTracker.iOS.Views.Home.VacationsTable
             ContentView.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
             ContentView.AddConstraints(View.FullSizeOf(ContentView));
 
-            this.SelectionStyle = UITableViewCellSelectionStyle.None;
+            SelectionStyle = UITableViewCellSelectionStyle.None;
         }
 
         public override void Bind(BindingSet<VacationCellViewModel> bindingSet)

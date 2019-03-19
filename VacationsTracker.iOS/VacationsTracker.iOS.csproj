@@ -94,6 +94,12 @@
     <Compile Include="Themes\AppStyle.cs" />
     <Compile Include="Themes\AppColors.cs" />
     <Compile Include="Views\ValueConverters\TypeToImageValueConverter.cs" />
+    <Compile Include="Views\Details\PageControl\VacationTypePagerView.cs" />
+    <Compile Include="Views\Details\PageControl\VacationTypePagerViewController.cs" />
+    <Compile Include="Views\ValueConverters\VacationStatusSegmentedControlConverter.cs" />
+    <Compile Include="Views\SubscribtionExtensions.cs" />
+    <Compile Include="Views\CustomBindings.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.FluentLayouts.Touch, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -182,6 +188,8 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Themes\" />
     <Folder Include="Views\ValueConverters\" />
+    <Folder Include="Views\Details\PageControl\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VacationsTracker.Core\VacationsTracker.Core.csproj">

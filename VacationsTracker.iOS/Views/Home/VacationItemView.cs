@@ -36,11 +36,11 @@ namespace VacationsTracker.iOS.Views.Home.VacationsTable
         {
             base.SetupLayout();
 
-            this.AddLayoutSubview(TypeImage)
-                .AddLayoutSubview(DurationLabel)
-                .AddLayoutSubview(TypeLabel)
-                .AddLayoutSubview(StatusLabel)
-                .AddLayoutSubview(Separator);
+            AddSubview(TypeImage);
+            AddSubview(DurationLabel);
+            AddSubview(TypeLabel);
+            AddSubview(StatusLabel);
+            AddSubview(Separator);
         }
 
         protected override void SetupLayoutConstraints()

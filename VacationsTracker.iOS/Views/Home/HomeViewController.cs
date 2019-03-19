@@ -22,6 +22,8 @@ namespace VacationsTracker.iOS.Views.Home
         {
             View = new HomeView();
 
+            NavigationController.NavigationBar.Hidden = false;
+
             VacationsSource = new UITableViewObservablePlainSource(
                 View.VacationsTableView,
                 _ => VacationItemViewCell.CellId)
@@ -32,12 +34,6 @@ namespace VacationsTracker.iOS.Views.Home
 
             Title = Strings.HomePage_Title;
             View.VacationsTableView.Source = VacationsSource;
-
-        }
-
-        public override void ViewDidLayoutSubviews()
-        {
-            base.ViewDidLayoutSubviews();
         }
 
         public override void Bind(BindingSet<HomeViewModel> bindingSet)

@@ -14,9 +14,12 @@ namespace VacationsTracker.Core.Data
     public class VacationsApi : IVacationApi
     {
         private readonly HttpClient _client;
+        private readonly ISecureStorage _storage;
+
 
         public VacationsApi(ISecureStorage storage)
         {
+            _storage = storage;
             var token = storage.GetAsync(Constants.TokenStorageKey).Result;
             _client = new HttpClient
             {
@@ -61,6 +64,7 @@ namespace VacationsTracker.Core.Data
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
+                _storage.Remove(Constants.TokenStorageKey);
                 throw new UnauthorizedAccessException();
             }
 

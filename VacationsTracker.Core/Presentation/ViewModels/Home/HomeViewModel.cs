@@ -70,8 +70,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
                     {
                         Vacations.Add(new VacationCellViewModel(vacation));
                     }
-
-                    RefreshedDateTime = DateTime.Now;
                 })
                 .OnError<InternetConnectionException>(_ => { })
                 .OnError<AuthenticationException>(ex => Debug.WriteLine(ex))

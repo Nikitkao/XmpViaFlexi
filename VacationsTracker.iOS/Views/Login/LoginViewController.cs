@@ -16,6 +16,8 @@ namespace VacationsTracker.iOS.Views.Login
 
         public override void LoadView()
         {
+            NavigationController.NavigationBar.Hidden = true;
+
             View = new LoginView();
         }
         

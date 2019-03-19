@@ -10,7 +10,7 @@ namespace VacationsTracker.Core.DataAccess
     public class UserRepository : IUserRepository
     {
         private readonly ISecureStorage _storage;
-        
+
         public UserRepository(ISecureStorage storage)
         {
             _storage = storage;
@@ -28,7 +28,7 @@ namespace VacationsTracker.Core.DataAccess
             {
                 throw new AuthenticationException();
             }
-            
+
             var authClient = new TokenClient(
                 identityServer.TokenEndpoint,
                 Constants.ClientId,

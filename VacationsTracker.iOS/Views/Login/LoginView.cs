@@ -27,16 +27,17 @@ namespace VacationsTracker.iOS.Views.Login
             LoginTextFiled = new UITextField
             {
                 Placeholder = "Login",
-                BackgroundColor = UIColor.White
-                
+                BackgroundColor = UIColor.White,
+                AutocapitalizationType = UITextAutocapitalizationType.None,
+                SpellCheckingType = UITextSpellCheckingType.No
             };
 
             PasswordTextField = new UITextField()
             {
                 Placeholder = "Password",
                 BackgroundColor = UIColor.White,
-                
-
+                AutocapitalizationType = UITextAutocapitalizationType.None,
+                SpellCheckingType = UITextSpellCheckingType.No
             };
 
             LoginButton = new UIButton();
@@ -97,7 +98,6 @@ namespace VacationsTracker.iOS.Views.Login
                 LoginTextFiled.AtRightOf(this, 40));
 
             this.AddConstraints(
-
                 ErrorMessage.Above(LoginTextFiled, 20),
                 //ErrorMessage.Height().EqualTo(60),
                 ErrorMessage.AtLeftOf(this, 40),

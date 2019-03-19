@@ -39,6 +39,11 @@ namespace VacationsTracker.iOS.Views.Details
         public override void LoadView()
         {
             View = new DetailsView();
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
 
             Title = Strings.VacationDetailsPage_Title;
 
@@ -55,6 +60,11 @@ namespace VacationsTracker.iOS.Views.Details
             //VacationsDataSource.CurrentItemIndexChangedWeakSubscribe(HandleEventHandler);
 
             VacationsPageViewController.DataSource = VacationsDataSource;
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
 
             NavigationItem.RightBarButtonItem = SaveButton;
         }

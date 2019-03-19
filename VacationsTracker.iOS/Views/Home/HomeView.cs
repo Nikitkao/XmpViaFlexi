@@ -38,10 +38,7 @@ namespace VacationsTracker.iOS.Views.Home
 
             this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            this.AddConstraints(VacationsTableView.WithSameRight(this),
-                VacationsTableView.WithSameLeft(this),
-                VacationsTableView.WithSameTop(this),
-                VacationsTableView.WithSameBottom(this));
+            this.AddConstraints(VacationsTableView.FullSizeOf(this));
         }
     }
 }

@@ -16,11 +16,16 @@ namespace VacationsTracker.iOS.Views.Login
 
         public override void LoadView()
         {
-            NavigationController.NavigationBar.Hidden = true;
-
             View = new LoginView();
         }
-        
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            NavigationController.NavigationBar.Hidden = true;
+        }
+
         public override void Bind(BindingSet<LoginViewModel> bindingSet)
         {
             bindingSet.Bind(View.LoginButton)

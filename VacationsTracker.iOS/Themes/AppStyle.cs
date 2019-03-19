@@ -2,17 +2,20 @@
 using CoreGraphics;
 using Foundation;
 using UIKit;
+using Cirrious.FluentLayouts.Touch;
 
 namespace VacationsTracker.iOS.Themes
 {
     public static class AppStyles
     {
-        public static UIButton SetPrimaryButtonStyle(this UIButton button, string text = null)
+        public static UIButton SetPrimaryStyle(this UIButton button, string text = null)
         {
             if (text != null)
             {
                 button.SetTitle(text, UIControlState.Normal);
             }
+
+            button.AddConstraints(button.Height().EqualTo(AppDimens.DefaultButtonHeight));
 
             button.SetMainBackgroundColorStyle();
 

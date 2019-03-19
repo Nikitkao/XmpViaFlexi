@@ -1,13 +1,11 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
-using Android.Widget;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Collections;
 using FlexiMvvm.ValueConverters;
 using FlexiMvvm.Views;
 using FlexiMvvm.Views.V7;
-using FlexiMvvm.Weak.Subscriptions;
 using VacationsTracker.Core.Presentation.ValueConverters;
 using VacationsTracker.Core.Presentation.ViewModels.Details;
 using VacationsTracker.Droid.Views.ValueConverters;

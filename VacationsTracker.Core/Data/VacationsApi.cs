@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using VacationsTracker.Core.Application;
 using VacationsTracker.Core.DataAccess;
 
 namespace VacationsTracker.Core.Data
@@ -16,30 +17,31 @@ namespace VacationsTracker.Core.Data
 
         public VacationsApi(ISecureStorage storage)
         {
-            var token = storage.GetAsync(Settings.TokenStorageKey).Result;
-            _client = new HttpClient();
+            var token = storage.GetAsync(Constants.TokenStorageKey).Result;
+            _client = new HttpClient
+            {
+                BaseAddress = new Uri(Constants.VacationApiUrl)
+            };
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         public Task<IEnumerable<VacationDto>> GetVacationsAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, Settings.VacationApiUrl);
+            var request = new HttpRequestMessage(HttpMethod.Get, Constants.VacationApiUrl);
 
             return SendRequest<IEnumerable<VacationDto>>(request);
         }
 
         public Task<VacationDto> GetVacationAsync(string id)
         {
-            var requestUri = Settings.VacationApiUrl + $"/{id}";
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_client.BaseAddress}{id}");
 
             return SendRequest<VacationDto>(request);
         }
 
         public Task AddOrUpdateAsync(VacationDto vacation)
         {
-            var requestUri = Settings.VacationApiUrl;
-            var request = new HttpRequestMessage(HttpMethod.Post, requestUri);
+            var request = new HttpRequestMessage(HttpMethod.Post, string.Empty);
             var serializedObject = JsonConvert.SerializeObject(vacation);
             request.Content = new StringContent(serializedObject, Encoding.UTF8, "application/json");
 
@@ -48,8 +50,7 @@ namespace VacationsTracker.Core.Data
 
         public Task DeleteAsync(string id)
         {
-            var requestUri = Settings.VacationApiUrl + $"/{id}";
-            var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"{_client.BaseAddress}{id}");
 
             return SendRequest<VacationDto>(request);
         }

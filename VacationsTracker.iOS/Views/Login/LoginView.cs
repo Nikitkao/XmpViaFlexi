@@ -26,17 +26,13 @@ namespace VacationsTracker.iOS.Views.Login
 
             BackgroundImage = new UIImageView(UIImage.FromFile("Login_bg.jpg"));
 
-            LoginTextFiled = new UITextField();
-            LoginTextFiled.SetPrimaryStyle(Strings.LoginPage_LoginPlaceholder);
+            LoginTextFiled = new UITextField().SetPrimaryStyle(Strings.LoginPage_LoginPlaceholder);
 
-            PasswordTextField = new UITextField();
-            PasswordTextField.SetPrimaryStyle(Strings.LoginPage_PasswordPlaceholder);
+            PasswordTextField = new UITextField().SetPrimaryStyle(Strings.LoginPage_PasswordPlaceholder);
 
-            LoginButton = new UIButton();
-            LoginButton.SetPrimaryStyle(Strings.LoginPage_SignIn);
+            LoginButton = new UIButton().SetPrimaryStyle(Strings.LoginPage_SignIn);
 
-            ErrorMessage = new UILabel();
-            ErrorMessage.SetErrorLabelStyle();
+            ErrorMessage = new UILabel().SetErrorLabelStyle();
         }
 
         protected override void SetupLayout()

@@ -52,26 +52,20 @@ namespace VacationsTracker.iOS.Views.Login
 
             this.SubviewsDoNotTranslateAutoresizingMaskIntoConstraints();
 
-            this.AddConstraints(BackgroundImage.WithSameRight(this),
-                BackgroundImage.WithSameLeft(this),
-                BackgroundImage.WithSameTop(this),
-                BackgroundImage.WithSameBottom(this));
+            this.AddConstraints(BackgroundImage.FullSizeOf(this));
 
             this.AddConstraints(
                 LoginButton.BelowCenterOf(this, 40),
-                LoginButton.Height().EqualTo(45),
                 LoginButton.AtLeftOf(PasswordTextField, 10),
                 LoginButton.AtRightOf(PasswordTextField, 10));
 
             this.AddConstraints(
                 PasswordTextField.Above(LoginButton, 15),
-                PasswordTextField.Height().EqualTo(45),
                 PasswordTextField.AtLeftOf(this, 40),
                 PasswordTextField.AtRightOf(this, 40));
 
             this.AddConstraints(
                 LoginTextFiled.Above(PasswordTextField, 10),
-                LoginTextFiled.Height().EqualTo(45),
                 LoginTextFiled.AtLeftOf(this, 40),
                 LoginTextFiled.AtRightOf(this, 40));
 

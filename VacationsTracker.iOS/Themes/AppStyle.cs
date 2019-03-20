@@ -136,6 +136,8 @@ namespace VacationsTracker.iOS.Themes
                 textField.Placeholder = placeholder;
             }
 
+            textField.AddConstraints(textField.Height().EqualTo(AppDimens.DefaultTextFieldHeight));
+
             textField.AutocapitalizationType = UITextAutocapitalizationType.None;
             textField.SpellCheckingType = UITextSpellCheckingType.No;
             textField.BackgroundColor = AppColors.WhiteColor;

@@ -57,12 +57,26 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
             get => _id;
             set
             {
-                Set(ref _id, value);
-                RaisePropertyChanged(nameof(DeleteVisibility));
+                if (string.IsNullOrEmpty(value))
+                {
+                    _createdBy = "Trump";
+                    Set(ref _id, Guid.NewGuid().ToString());
+                }
+                else
+                {
+                    DeleteVisibility = true;
+                    Set(ref _id, value);
+                }
             }
         }
 
-        public bool DeleteVisibility => Id != null;
+        public bool _deleteVisibility;
+
+        public bool DeleteVisibility
+        {
+            get => _deleteVisibility;
+            set => Set(ref _deleteVisibility, value);
+        }
 
         public DateTime Start
         {
@@ -118,6 +132,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 {
                     var item = new OfflineVacation()
                     {
+                        Id = Guid.Parse(Id),
                         Start = Start,
                         End = End,
                         VacationStatus = VacationStatus,
@@ -126,16 +141,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                         CreatedBy = _createdBy,
                         Type = OperationType.AddOrUpdate
                     };
-
-                    if (string.IsNullOrEmpty(Id))
-                    {
-                        item.CreatedBy = "Trump";
-                        item.Id = Guid.NewGuid();
-                    }
-                    else
-                    {
-                        item.Id = Guid.Parse(Id);
-                    }
 
                     _dbService.InsertOrReplace(item);
                     Debug.WriteLine("Connection Exception");
@@ -156,7 +161,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 Start = DateTime.Now;
                 End = DateTime.Now.AddDays(7);
                 VacationStatus = VacationStatus.Approved;
-                VacationType = VacationType.Undefined;
+                VacationType = VacationType.Regular;
             }
             else
             {

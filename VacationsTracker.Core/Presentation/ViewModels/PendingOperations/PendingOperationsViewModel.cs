@@ -35,6 +35,13 @@ namespace VacationsTracker.Core.Presentation.ViewModels.PendingOperations
 
         public ICommand<VacationCellViewModel> VacationSelectedCommand => CommandProvider.Get<VacationCellViewModel>(VacationSelected);
 
+        protected override async Task InitializeAsync()
+        {
+            await base.InitializeAsync();
+
+            await LoadVacations();
+        }
+
         public Task LoadVacations()
         {
             return OperationFactory

@@ -2,6 +2,7 @@
 using FlexiMvvm;
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Collections;
+using FlexiMvvm.ValueConverters;
 using FlexiMvvm.Views;
 using UIKit;
 using VacationsTracker.Core.Presentation.ValueConverters;
@@ -178,6 +179,15 @@ namespace VacationsTracker.iOS.Views.Details
             bindingSet.Bind(View.VacationPageControl)
                 .For(v => v.CurrentPage)
                 .To(vm => vm.VacationType);
+
+            bindingSet.Bind(View.DeleteButton)
+                .For(v => v.TouchUpInsideBinding())
+                .To(vm => vm.DeleteCommand);
+
+            bindingSet.Bind(View.DeleteButton)
+                .For(v => v.Hidden)
+                .To(vm => vm.DeleteVisibility)
+                .WithConvertion<InvertValueConverter>();
         }
 
         private UIViewController PagerFactory(object parameters)

@@ -22,6 +22,19 @@ namespace VacationsTracker.iOS.Themes
             return button;
         }
 
+        public static UIButton SetDeleteStyle(this UIButton button, string text = null)
+        {
+            if (text != null)
+            {
+                button.SetTitle(text, UIControlState.Normal);
+            }
+
+            button.BackgroundColor = UIColor.Red;
+            button.AddConstraints(button.Height().EqualTo(AppDimens.DefaultButtonHeight),button.Width().EqualTo(80));
+
+            return button;
+        }
+
         public static UILabel SetHeadline1Style(this UILabel label, string text = null)
         {
             label.SetDisplayStyle(text, AppColors.GrayColor, 30);

@@ -10,6 +10,7 @@ using VacationsTracker.iOS.Views;
 using VacationsTracker.iOS.Views.Details;
 using VacationsTracker.iOS.Views.Home;
 using VacationsTracker.iOS.Views.Login;
+using VacationsTracker.iOS.Views.PendingOperations;
 
 namespace VacationsTracker.iOS.Navigation
 {
@@ -38,6 +39,18 @@ namespace VacationsTracker.iOS.Navigation
         {
             var homeViewController = GetViewController<HomeViewModel, HomeViewController>(fromViewModel);
             homeViewController.NotNull().NavigationController.PushViewController(new DetailsViewController(new VacationDetailsParameters(vacationId)), true);
+        }
+
+        public void CloseDetails(DetailsViewModel fromViewModel)
+        {
+            var detailsViewModel = GetViewController<DetailsViewModel, DetailsViewController>(fromViewModel);
+            detailsViewModel.NotNull().NavigationController.PopViewController(true);
+        }
+
+        public void NavigateToPendingOperations(HomeViewModel fromViewModel)
+        {
+            var homeViewModel = GetViewController<HomeViewModel, HomeViewController>(fromViewModel);
+            homeViewModel.NotNull().NavigationController.PushViewController(new PendingOperationsController(), true);
         }
     }
 }

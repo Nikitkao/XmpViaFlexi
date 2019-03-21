@@ -52,6 +52,8 @@ namespace VacationsTracker.iOS.Views.Details
 
         public FluentLayout EndDateConstraintBottom { get; private set; }
 
+        public UIButton DeleteButton { get; private set; }
+
         protected override void SetupSubviews()
         {
             base.SetupSubviews();
@@ -82,6 +84,8 @@ namespace VacationsTracker.iOS.Views.Details
             EndYearLabel = new UILabel().SetDisplay6Style();
 
             BelowDatesSeparator = new UIView().SetSeparator1Style();
+
+            DeleteButton = new UIButton().SetDeleteStyle("Delete");
 
             StatusSegmentedControl = new UISegmentedControl(
                 Strings.VacationStatus_Approved,
@@ -114,7 +118,8 @@ namespace VacationsTracker.iOS.Views.Details
                 .AddLayoutSubview(BelowDatesSeparator)
                 .AddLayoutSubview(StatusSegmentedControl)
                 .AddLayoutSubview(VacationStartDatePicker)
-                .AddLayoutSubview(VacationEndDatePicker);
+                .AddLayoutSubview(VacationEndDatePicker)
+                .AddLayoutSubview(DeleteButton);
         }
 
         protected override void SetupLayoutConstraints()
@@ -209,6 +214,10 @@ namespace VacationsTracker.iOS.Views.Details
 
             EndDateConstraintBottom.Active = false;
             StartDateConstraintBottom.Active = false;
+
+            this.AddConstraints(
+               DeleteButton.WithSameCenterX(this),
+               DeleteButton.AtBottomOf(this, 10));
         }
 
         private void SetupDatePicker(UIDatePicker picker)

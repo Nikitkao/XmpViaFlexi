@@ -24,13 +24,6 @@ namespace VacationsTracker.Droid.Views.PendingOperations
             
             SetupRecyclerView();
         }
-
-        protected override async void OnResume()
-        {
-            base.OnResume();
-
-            await ViewModel.LoadVacations();
-        }
         
         private void SetupRecyclerView()
         {

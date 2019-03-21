@@ -2,56 +2,40 @@
 using FlexiMvvm.Bindings;
 using FlexiMvvm.Collections;
 using FlexiMvvm.Views;
-using UIKit;
-using VacationsTracker.Core.Presentation.ViewModels.Home;
+using VacationsTracker.Core.Presentation.ViewModels.PendingOperations;
 using VacationsTracker.Core.Resources;
-using VacationsTracker.iOS.Views.Home.VacationsTable;
 
-namespace VacationsTracker.iOS.Views.Home
+namespace VacationsTracker.iOS.Views.PendingOperations
 {
-    public class HomeViewController : FlxBindableViewController<HomeViewModel>
+    public class PendingOperationsController : FlxBindableViewController<PendingOperationsViewModel>
     {
         private UITableViewObservablePlainSource VacationsSource { get; set; }
 
-        private UIBarButtonItem OperationsButton { get; } = new UIBarButtonItem(Strings.Operations_Title, UIBarButtonItemStyle.Done, null);
-
-        private UIBarButtonItem AddButton { get; } = new UIBarButtonItem("Add", UIBarButtonItemStyle.Done, null);
-
-        public new HomeView View
+        public new PendingOperationsView View
         {
-            get => (HomeView)base.View.NotNull();
+            get => (PendingOperationsView)base.View.NotNull();
             set => base.View = value;
-        }
-
-        public override async void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-
-            NavigationItem.LeftBarButtonItem = OperationsButton;
-            NavigationItem.RightBarButtonItem = AddButton;
-
-            await ViewModel.LoadVacations();
         }
 
         public override void LoadView()
         {
-            View = new HomeView();
+            View = new PendingOperationsView();
 
             NavigationController.NavigationBar.Hidden = false;
 
             VacationsSource = new UITableViewObservablePlainSource(
                 View.VacationsTableView,
-                _ => VacationItemViewCell.CellId)
+                _ => PendingOperationItemCell.CellId)
             {
                 Items = ViewModel.Vacations,
                 ItemsContext = ViewModel
             };
 
-            Title = Strings.HomePage_Title;
+            Title = Strings.Operations_Title;
             View.VacationsTableView.Source = VacationsSource;
         }
 
-        public override void Bind(BindingSet<HomeViewModel> bindingSet)
+        public override void Bind(BindingSet<PendingOperationsViewModel> bindingSet)
         {
             base.Bind(bindingSet);
 
@@ -70,14 +54,6 @@ namespace VacationsTracker.iOS.Views.Home
             bindingSet.Bind(View.VacationsTableView.RefreshControl)
                 .For(v => v.ValueChangedBinding())
                 .To(vm => vm.RefreshCommand);
-
-            bindingSet.Bind(OperationsButton)
-                .For(v => v.NotNull().ClickedBinding())
-                .To(vm => vm.OpenOperationsCommand);
-
-            bindingSet.Bind(AddButton)
-                .For(v => v.NotNull().ClickedBinding())
-                .To(vm => vm.AddCommand);
         }
     }
 }

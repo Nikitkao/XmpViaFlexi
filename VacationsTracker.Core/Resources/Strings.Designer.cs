@@ -214,6 +214,15 @@ namespace VacationsTracker.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operations.
+        /// </summary>
+        public static string Operations_Title {
+            get {
+                return ResourceManager.GetString("Operations_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveNavigationButton_Text {

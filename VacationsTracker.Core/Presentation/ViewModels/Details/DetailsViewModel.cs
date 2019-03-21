@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using FlexiMvvm;
 using FlexiMvvm.Collections;
@@ -20,6 +19,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
     {
         private readonly IVacationRepository _vacationsRepository;
         private readonly INavigationService _navigationService;
+        private readonly IDbService _dbService;
 
         private string _id;
         private string _createdBy;
@@ -33,20 +33,36 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         public DetailsViewModel(
             INavigationService navigationService,
             IVacationRepository vacationsRepository,
-            IOperationFactory operationFactory)
+            IOperationFactory operationFactory,
+            IDbService dbService)
             : base(operationFactory)
         {
             _navigationService = navigationService;
             _vacationsRepository = vacationsRepository;
+            _dbService = dbService;
         }
 
         public ICommand SaveCommand => CommandProvider.GetForAsync(OnSave, () => !Busy);
+
+        public ICommand DeleteCommand => CommandProvider.GetForAsync(DeleteOperation, () => !Busy);
 
         public bool Busy
         {
             get => _busy;
             set => Set(ref _busy, value);
         }
+
+        private string Id
+        {
+            get => _id;
+            set
+            {
+                Set(ref _id, value);
+                RaisePropertyChanged(nameof(DeleteVisibility));
+            }
+        }
+
+        public bool DeleteVisibility => Id != null;
 
         public DateTime Start
         {
@@ -65,7 +81,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
             get => _vacationType;
             set => Set(ref _vacationType, value);
         }
-        
+
         public VacationStatus VacationStatus
         {
             get => _vacationStatus;
@@ -88,7 +104,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 .WithExpressionAsync(token =>
                 {
                     var vac = new Vacation(
-                        _id,
+                        Id,
                         Start,
                         End,
                         VacationStatus,
@@ -97,8 +113,34 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                         _createdBy);
                     return _vacationsRepository.AddOrUpdateAsync(vac, token);
                 })
-                .OnSuccess(_ => {})
-                .OnError<InternetConnectionException>(_ => Debug.WriteLine("Connection Exception"))
+                .OnSuccess(_ => _navigationService.CloseDetails(this))
+                .OnError<InternetConnectionException>(h =>
+                {
+                    var item = new OfflineVacation()
+                    {
+                        Start = Start,
+                        End = End,
+                        VacationStatus = VacationStatus,
+                        VacationType = VacationType,
+                        Created = _created,
+                        CreatedBy = _createdBy,
+                        Type = OperationType.AddOrUpdate
+                    };
+
+                    if (string.IsNullOrEmpty(Id))
+                    {
+                        item.CreatedBy = "Trump";
+                        item.Id = Guid.NewGuid();
+                    }
+                    else
+                    {
+                        item.Id = Guid.Parse(Id);
+                    }
+
+                    _dbService.InsertOrReplace(item);
+                    Debug.WriteLine("Connection Exception");
+                    _navigationService.CloseDetails(this);
+                })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }
@@ -107,26 +149,65 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         {
             await base.InitializeAsync(parameters);
 
+            Id = parameters?.VacationId;
+
+            if (string.IsNullOrEmpty(parameters?.VacationId))
+            {
+                Start = DateTime.Now;
+                End = DateTime.Now.AddDays(7);
+                VacationStatus = VacationStatus.Approved;
+                VacationType = VacationType.Undefined;
+            }
+            else
+            {
+                await OperationFactory
+                    .CreateOperation(OperationContext)
+                    .WithInternetConnectionCondition()
+                    .WithLoadingNotification()
+                    .WithExpressionAsync(token =>
+                    {
+                        var id = parameters.VacationId;
+                        return _vacationsRepository.GetVacationAsync(id, token);
+                    })
+                    .OnSuccess(vacation =>
+                    {
+                        Start = vacation.Start;
+                        End = vacation.End;
+                        VacationStatus = vacation.VacationStatus;
+                        VacationType = vacation.VacationType;
+                        _created = vacation.Created;
+                        _createdBy = vacation.CreatedBy;
+                    })
+                    .OnError<InternetConnectionException>(_ => { })
+                    .OnError<Exception>(error => Debug.WriteLine(error.Exception))
+                    .ExecuteAsync();
+            }
+        }
+
+        private async Task DeleteOperation()
+        {
             await OperationFactory
                 .CreateOperation(OperationContext)
                 .WithInternetConnectionCondition()
                 .WithLoadingNotification()
-                .WithExpressionAsync(token =>
+                .WithExpressionAsync(token => _vacationsRepository.DeleteVacationAsync(Id, token))
+                .OnSuccess(_ => _navigationService.CloseDetails(this))
+                .OnError<InternetConnectionException>(h =>
                 {
-                    var id = parameters.NotNull().VacationId;
-                    return _vacationsRepository.GetVacationAsync(id, token);
+                    var item = new OfflineVacation()
+                    {
+                        Id = Guid.Parse(Id),
+                        Type = OperationType.Delete,
+                        Start = Start,
+                        End = End,
+                        VacationStatus = VacationStatus,
+                        VacationType = VacationType,
+                };
+
+                    _dbService.InsertOrReplace(item);
+                    Debug.WriteLine("Connection Exception");
+                    _navigationService.CloseDetails(this);
                 })
-                .OnSuccess(vacation =>
-                {
-                    _id = vacation.Id;
-                    Start = vacation.Start;
-                    End = vacation.End;
-                    VacationStatus = vacation.VacationStatus;
-                    VacationType = vacation.VacationType;
-                    _created = vacation.Created;
-                    _createdBy = vacation.CreatedBy;
-                })
-                .OnError<InternetConnectionException>(_ => { })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }

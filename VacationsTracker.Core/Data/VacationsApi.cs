@@ -16,16 +16,15 @@ namespace VacationsTracker.Core.Data
         private readonly HttpClient _client;
         private readonly ISecureStorage _storage;
 
-
         public VacationsApi(ISecureStorage storage)
         {
             _storage = storage;
-            var token = storage.GetAsync(Constants.TokenStorageKey).Result;
+            
             _client = new HttpClient
             {
                 BaseAddress = new Uri(Constants.VacationApiUrl)
             };
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            SetToken();
         }
 
         public Task<IEnumerable<VacationDto>> GetVacationsAsync()
@@ -77,6 +76,15 @@ namespace VacationsTracker.Core.Data
             }
 
             return baseServerResponse.Result;
+        }
+
+        public void SetToken()
+        {
+            var token = _storage.GetAsync(Constants.TokenStorageKey).Result;
+            if (!string.IsNullOrEmpty(token))
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            }
         }
     }
 }

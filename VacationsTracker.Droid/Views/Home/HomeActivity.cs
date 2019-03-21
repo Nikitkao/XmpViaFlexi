@@ -5,7 +5,6 @@ using Android.Support.V4.View;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using FlexiMvvm.Bindings;
-using FlexiMvvm.Views;
 using FlexiMvvm.Views.V7;
 using VacationsTracker.Core.Presentation.ViewModels.Home;
 
@@ -15,7 +14,10 @@ namespace VacationsTracker.Droid.Views.Home
     public class HomeActivity : FlxBindableAppCompatActivity<HomeViewModel>
     {
         private MainListActivityViewHolder ViewHolder { get; set; }
+
         private VacationsAdapter VacationsAdapter { get; set; }
+
+        private ImageButton _menuButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,13 +27,21 @@ namespace VacationsTracker.Droid.Views.Home
 
             ViewHolder = new MainListActivityViewHolder(this);
 
-            var menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
+            _menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
 
-            menuButton.ClickWeakSubscribe(ButtonClickHandler);
+            //ImageButton menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
+            //menuButton.ClickWeakSubscribe(ButtonClickHandler);
 
             SetupRecyclerView();
         }
 
+        protected override async void OnResume()
+        {
+            base.OnResume();
+
+            await ViewModel.LoadVacations();
+        }
+        
         private void ButtonClickHandler(object sender, EventArgs e)
         {
             if (ViewHolder.DrawerLayout.IsDrawerOpen(GravityCompat.Start))
@@ -53,7 +63,7 @@ namespace VacationsTracker.Droid.Views.Home
             ViewHolder.RecyclerView.SetAdapter(VacationsAdapter);
             ViewHolder.RecyclerView.SetLayoutManager(new LinearLayoutManager(this, 1, false));
         }
-
+        
         public override void Bind(BindingSet<HomeViewModel> bindingSet)
         {
             base.Bind(bindingSet);
@@ -69,6 +79,14 @@ namespace VacationsTracker.Droid.Views.Home
             bindingSet.Bind(ViewHolder.Refresher)
                 .For(v => v.ValueChangedBinding())
                 .To(vm => vm.RefreshCommand);
+
+            bindingSet.Bind(ViewHolder.Fab)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.AddCommand);
+
+            bindingSet.Bind(_menuButton)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.OpenOperationsCommand);
         }
     }
 }

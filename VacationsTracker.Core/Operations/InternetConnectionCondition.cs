@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using FlexiMvvm;
 using FlexiMvvm.Operations;
@@ -20,6 +17,10 @@ namespace VacationsTracker.Core.Operations
             {
                 return Task.FromResult(true);
             }
+            //else
+            //{
+                //return Task.FromResult(false);
+            //}
             throw new InternetConnectionException("No internet connection. TODO localize.");
         }
     }

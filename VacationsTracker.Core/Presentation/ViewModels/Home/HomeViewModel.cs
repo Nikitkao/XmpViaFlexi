@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using FlexiMvvm;
@@ -17,19 +16,12 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
     {
         private readonly INavigationService _navigationService;
         private readonly IVacationRepository _vacationsRepository;
-
-        private DateTime _refreshedDateTime;
+        private readonly ISynchronizationService _synchronizationService;
 
         private bool _busy;
 
         public RangeObservableCollection<VacationCellViewModel> Vacations { get; } =
             new RangeObservableCollection<VacationCellViewModel>();
-
-        public DateTime RefreshedDateTime
-        {
-            get => _refreshedDateTime;
-            set => Set(ref _refreshedDateTime, value);
-        }
 
         public bool Busy
         {
@@ -41,22 +33,29 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
 
         public ICommand<VacationCellViewModel> VacationSelectedCommand => CommandProvider.Get<VacationCellViewModel>(VacationSelected);
 
-        public HomeViewModel(INavigationService navigationService, IVacationRepository vacationsRepository,
+        public ICommand AddCommand => CommandProvider.Get(Add);
+
+        public ICommand OpenOperationsCommand => CommandProvider.Get(OpenOperations);
+
+        public HomeViewModel(INavigationService navigationService, IVacationRepository vacationsRepository, ISynchronizationService synchronizationService,
             IOperationFactory operationFactory) : base(operationFactory)
         {
             _navigationService = navigationService;
             _vacationsRepository = vacationsRepository;
+            _synchronizationService = synchronizationService;
         }
 
         protected override async Task InitializeAsync()
         {
             await base.InitializeAsync();
 
-            await LoadVacations();
+            await _synchronizationService.TrySynchronize();
         }
 
-        private Task LoadVacations()
+        public Task LoadVacations()
         {
+            Busy = true;
+
             return OperationFactory
                 .CreateOperation(OperationContext)
                 .WithInternetConnectionCondition()
@@ -79,6 +78,16 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
         private void VacationSelected(VacationCellViewModel cellViewModel)
         {
             _navigationService.NavigateToDetails(this, cellViewModel.Id);
+        }
+
+        private void OpenOperations()
+        {
+            _navigationService.NavigateToPendingOperations(this);
+        }
+
+        private void Add()
+        {
+            _navigationService.NavigateToDetails(this, null);
         }
     }
 }

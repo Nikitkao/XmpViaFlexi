@@ -12,6 +12,7 @@
     <PackageReference Include="FlexiMvvm.Lifecycle.PreRelease" Version="0.9.7-prerelease" />
     <PackageReference Include="FlexiMvvm.Validation.PreRelease" Version="0.9.7-prerelease" />
     <PackageReference Include="IdentityModel" Version="3.10.6" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
   </ItemGroup>
 

@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
 using VacationsTracker.Core.Application;
+using VacationsTracker.Core.Data;
 using VacationsTracker.Core.Domain;
 
 namespace VacationsTracker.Core.DataAccess
@@ -11,9 +12,12 @@ namespace VacationsTracker.Core.DataAccess
     {
         private readonly ISecureStorage _storage;
 
-        public UserRepository(ISecureStorage storage)
+        private readonly IVacationApi _vacationApi;
+
+        public UserRepository(ISecureStorage storage, IVacationApi vacationApi)
         {
             _storage = storage;
+            _vacationApi = vacationApi;
         }
 
         public async Task AuthorizeAsync(User user, CancellationToken token = default)
@@ -46,6 +50,7 @@ namespace VacationsTracker.Core.DataAccess
             }
 
             await _storage.SetAsync(Constants.TokenStorageKey, userTokenResponse.AccessToken);
+            _vacationApi.SetToken();
         }
     }
 }

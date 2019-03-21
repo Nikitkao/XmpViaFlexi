@@ -66,6 +66,7 @@
     <Compile Include="Views\Home\HomeActivity.cs" />
     <Compile Include="Views\Home\VacationCellViewHolder.cs" />
     <Compile Include="Views\Home\VacationsAdapter.cs" />
+    <Compile Include="Views\PendingOperations\PendingOperationsActivity.cs" />
     <Compile Include="Views\SplashScreenActivity.cs" />
     <Compile Include="Views\SubscribtionExtensions.cs" />
     <Compile Include="Views\ValueConverters\ImageValueConverter.cs" />
@@ -111,6 +112,10 @@
     <AndroidResource Include="Resources\drawable\tab_indicator_selected.xml" />
     <AndroidResource Include="Resources\drawable\tab_indicator_default.xml" />
     <AndroidResource Include="Resources\drawable\tab_selector.xml" />
+    <AndroidResource Include="Resources\layout\activity_pending_operations.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\strings.xml" />
     <Content Include="Views\ViewHolderGenerator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ViewHolderGenerator.cs</LastGenOutput>
@@ -119,7 +124,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
-    <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
@@ -151,6 +155,9 @@
     </PackageReference>
     <PackageReference Include="Plugin.CurrentActivity">
       <Version>2.1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.5.231</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView">

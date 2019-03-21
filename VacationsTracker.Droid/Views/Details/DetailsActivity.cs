@@ -149,6 +149,15 @@ namespace VacationsTracker.Droid.Views.Details
             bindingSet.Bind(ViewHolder.SaveButton)
                 .For(v => v.ClickBinding())
                 .To(vm => vm.SaveCommand);
+
+            bindingSet.Bind(ViewHolder.DeleteButton)
+                .For(v => v.ClickBinding())
+                .To(vm => vm.DeleteCommand);
+
+            bindingSet.Bind(ViewHolder.DeleteButton)
+                .For(v => v.Visibility)
+                .To(vm => vm.DeleteVisibility)
+                .WithConvertion<VisibleGoneVisibilityValueConverter>();
         }
     }
 }

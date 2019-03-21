@@ -36,25 +36,5 @@ namespace VacationsTracker.Core.Domain
             Created = created;
             CreatedBy = createdBy;
         }
-
-        /*
-        public void Deconstruct(
-            out string vacationid,
-            out DateTime startdate,
-            out DateTime enddate,
-            out VacationStatus status,
-            out VacationType type,
-            out DateTime created,
-            out string createdBy)
-        {
-            vacationid = Id;
-            startdate = Start;
-            enddate = End;
-            status = VacationStatus;
-            type = VacationType;
-            created = Created;
-            createdBy = CreatedBy;
-        }
-        */
     }
 }

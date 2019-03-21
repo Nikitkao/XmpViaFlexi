@@ -5,7 +5,6 @@
     <string name="delete_navigation_button_text">Delete</string>
     <string name="home_page_logout_button_text">Logout</string>
     <string name="home_page_title">Requests</string>
-    <string name="details_page_title">Requests</string>
     <string name="login_page_invalid_credentials">Please, retry your login and password pair</string>
     <string name="login_page_invalid_login">Login field must not be empty</string>
     <string name="login_page_invalid_password">Password field must not be empty</string>
@@ -18,6 +17,7 @@
     <string name="navigation_view_closed">CLOSED</string>
     <string name="navigation_view_open">OPEN</string>
     <string name="new_vacation_page_title">New Request</string>
+    <string name="operations_title">Operations</string>
     <string name="save_navigation_button_text">Save</string>
     <string name="vacation_details_page_title">Details</string>
     <string name="vacation_status_approved">Approved</string>

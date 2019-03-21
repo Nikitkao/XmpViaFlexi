@@ -1,5 +1,7 @@
-﻿using VacationsTracker.Core.Data;
+﻿using System;
+using VacationsTracker.Core.Data;
 using VacationsTracker.Core.Domain;
+using VacationsTracker.Core.Presentation.ViewModels;
 
 namespace VacationsTracker.Core.DataAccess
 {
@@ -29,6 +31,42 @@ namespace VacationsTracker.Core.DataAccess
                 VacationType = vacation.VacationType,
                 Created = vacation.Created,
                 CreatedBy = vacation.CreatedBy,
+            };
+        }
+
+        public static OfflineVacation ToOffline(this Vacation vacation)
+        {
+            return new OfflineVacation()
+            {
+                Id = Guid.Parse(vacation.Id),
+                Start = vacation.Start,
+                End = vacation.End,
+                VacationStatus = vacation.VacationStatus,
+                VacationType = vacation.VacationType,
+                Created = vacation.Created,
+                CreatedBy = vacation.CreatedBy,
+            };
+        }
+
+        public static Vacation ToVacation(this OfflineVacation vacation)
+        {
+            return new Vacation
+                (
+                    vacation.Id.ToString(),
+                    vacation.Start,
+                    vacation.End,
+                    vacation.VacationStatus,
+                    vacation.VacationType,
+                    vacation.Created,
+                    vacation.CreatedBy)
+                { };
+        }
+
+        public static OfflineVacation ToOffline(this VacationCellViewModel vacation)
+        {
+            return new OfflineVacation()
+            {
+                Id = Guid.Parse(vacation.Id)
             };
         }
     }

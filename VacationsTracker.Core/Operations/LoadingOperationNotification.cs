@@ -12,7 +12,7 @@ namespace VacationsTracker.Core.Operations
             : base(delay, duration, isCancellable)
         {
         }
-        
+
         protected override void OnStartOperation(OperationContext context)
         {
             switch (context.Owner)

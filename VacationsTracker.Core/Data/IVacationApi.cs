@@ -12,5 +12,7 @@ namespace VacationsTracker.Core.Data
         Task AddOrUpdateAsync(VacationDto vacation);
 
         Task DeleteAsync(string id);
+
+        void SetToken();
     }
 }

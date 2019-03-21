@@ -10,6 +10,7 @@ using FlexiMvvm.Views;
 using VacationsTracker.Core.Presentation.ViewModels.Details;
 using VacationsTracker.Droid.Views.Details;
 using VacationsTracker.Droid.Views.Home;
+using VacationsTracker.Droid.Views.PendingOperations;
 
 namespace VacationsTracker.Droid.Navigation
 {
@@ -43,6 +44,19 @@ namespace VacationsTracker.Droid.Navigation
             var splashScreenActivity = GetActivity<EntryViewModel, SplashScreenActivity>(fromViewModel);
             var loginIntent = new Intent(splashScreenActivity, typeof(LoginActivity));
             splashScreenActivity.NotNull().StartActivity(loginIntent);
+        }
+
+        public void CloseDetails(DetailsViewModel fromViewModel)
+        {
+            var detailsActivity = GetActivity<DetailsViewModel, DetailsActivity>(fromViewModel);
+            detailsActivity.NotNull().Finish();
+        }
+
+        public void NavigateToPendingOperations(HomeViewModel fromViewModel)
+        {
+            var detailsActivity = GetActivity<HomeViewModel, HomeActivity>(fromViewModel);
+            var pendingOperationsIntent = new Intent(detailsActivity, typeof(PendingOperationsActivity));
+            detailsActivity.NotNull().StartActivity(pendingOperationsIntent);
         }
     }
 }

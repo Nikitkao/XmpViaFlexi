@@ -13,7 +13,7 @@
 		<TextView
 			android:id="@+id/nav_title"
 			android:textColor="@android:color/white"
-			android:text="@string/details_page_title"
+			android:text="@string/vacation_details_page_title"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_centerInParent="true" />
@@ -24,8 +24,15 @@
 			android:gravity="center"
 			android:layout_alignParentRight="true"
 			android:layout_width="70dp"
-			android:layout_height="match_parent"
-			android:layout_centerInParent="true" />
+			android:layout_height="match_parent" />
+		<TextView
+			android:id="@+id/delete_button"
+			android:text="@string/delete_navigation_button_text"
+			android:gravity="center"
+			android:layout_alignParentLeft="true"
+			android:layout_width="70dp"
+			android:textColor="@android:color/holo_red_dark"
+			android:layout_height="match_parent" />
   </RelativeLayout>
   <ProgressBar
     android:id="@+id/ctrlActivityIndicator"

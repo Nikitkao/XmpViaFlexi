@@ -15,7 +15,7 @@
     var inputResxFiles = Directory.GetFiles(".", "Strings*.resx");
     string[] outputProjectsRelativePaths =
     {
-        "..\\..\\VacationsTracker.Android"
+        "..\\..\\VacationsTracker.Droid"
     };
 // *********************** Strings Generation Configuration **********************************
 

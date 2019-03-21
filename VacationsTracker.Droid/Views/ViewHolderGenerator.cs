@@ -12,6 +12,7 @@ namespace VacationsTracker.Droid.Views
     {
          private readonly Activity activity;
 
+         private TextView deleteButton;
          private TextView navTitle;
          private TextView saveButton;
          private ProgressBar ctrlActivityIndicator;
@@ -36,6 +37,10 @@ namespace VacationsTracker.Droid.Views
 
             this.activity = activity;
         }
+
+        
+        public TextView DeleteButton =>
+            deleteButton ?? (deleteButton = activity.FindViewById<TextView>(Resource.Id.delete_button));
 
         
         public TextView NavTitle =>
@@ -180,6 +185,34 @@ namespace VacationsTracker.Droid.Views
         
         public Android.Support.Design.Widget.NavigationView NavigationView =>
             navigationView ?? (navigationView = activity.FindViewById<Android.Support.Design.Widget.NavigationView>(Resource.Id.navigation_view));
+    }
+
+    public partial class PendingOperationsActivityViewHolder
+    {
+         private readonly Activity activity;
+
+         private TextView navTitle;
+         private Android.Support.V4.Widget.SwipeRefreshLayout refresher2;
+         private Android.Support.V7.Widget.RecyclerView recyclerView2;
+
+        public PendingOperationsActivityViewHolder( Activity activity)
+        {
+            if (activity == null) throw new ArgumentNullException(nameof(activity));
+
+            this.activity = activity;
+        }
+
+        
+        public TextView NavTitle =>
+            navTitle ?? (navTitle = activity.FindViewById<TextView>(Resource.Id.nav_title));
+
+        
+        public Android.Support.V4.Widget.SwipeRefreshLayout Refresher2 =>
+            refresher2 ?? (refresher2 = activity.FindViewById<Android.Support.V4.Widget.SwipeRefreshLayout>(Resource.Id.refresher2));
+
+        
+        public Android.Support.V7.Widget.RecyclerView RecyclerView2 =>
+            recyclerView2 ?? (recyclerView2 = activity.FindViewById<Android.Support.V7.Widget.RecyclerView>(Resource.Id.recycler_view2));
     }
 
     public partial class VacationCellViewHolder

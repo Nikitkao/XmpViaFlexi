@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using VacationsTracker.Core.Domain;
 
 namespace VacationsTracker.Core.DataAccess
@@ -25,25 +26,27 @@ namespace VacationsTracker.Core.DataAccess
 
                 _isRunning = true;
 
-                while (true)
-                {
-                    var firstAwaitingOperation = await _dbService.GetFirstOrDefault().ConfigureAwait(false);
-                    if (firstAwaitingOperation == null)
-                    {
-                        break;
-                    }
+                var allVacations = await _dbService.GetItems().ConfigureAwait(false);
 
-                    switch (firstAwaitingOperation.Type)
+                var vacationsToUpdate = allVacations.Where(x => x.Type != OperationType.UpToDate);
+                
+                foreach (var awaitingOperation in vacationsToUpdate)
+                {
+
+                    switch (awaitingOperation.Type)
                     {
                         case OperationType.AddOrUpdate:
-                            await _vacationRepository.AddOrUpdateAsync(firstAwaitingOperation.ToVacation()).ConfigureAwait(false);
+                            await _vacationRepository.AddOrUpdateAsync(awaitingOperation.ToVacation())
+                                .ConfigureAwait(false);
                             break;
                         case OperationType.Delete:
-                            await _vacationRepository.DeleteVacationAsync(firstAwaitingOperation.Id.ToString()).ConfigureAwait(false);
+                            await _vacationRepository.DeleteVacationAsync(awaitingOperation.Id.ToString())
+                                .ConfigureAwait(false);
                             break;
                     }
 
-                    await _dbService.RemoveItem(firstAwaitingOperation).ConfigureAwait(false);
+                    awaitingOperation.Type = OperationType.UpToDate;
+                    await _dbService.InsertOrReplace(awaitingOperation).ConfigureAwait(false);
                 }
             }
             finally

@@ -45,6 +45,7 @@ namespace VacationsTracker.Core.DataAccess
                 VacationType = vacation.VacationType,
                 Created = vacation.Created,
                 CreatedBy = vacation.CreatedBy,
+                Type = OperationType.UpToDate,
             };
         }
 

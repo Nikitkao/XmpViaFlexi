@@ -17,7 +17,7 @@ namespace VacationsTracker.Droid.Views.Home
 
         private VacationsAdapter VacationsAdapter { get; set; }
 
-        private ImageButton _menuButton;
+        //private ImageButton _menuButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,7 +27,7 @@ namespace VacationsTracker.Droid.Views.Home
 
             ViewHolder = new MainListActivityViewHolder(this);
 
-            _menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
+            //_menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
 
             //ImageButton menuButton = FindViewById<ImageButton>(Resource.Id.menu_button);
             //menuButton.ClickWeakSubscribe(ButtonClickHandler);
@@ -84,9 +84,9 @@ namespace VacationsTracker.Droid.Views.Home
                 .For(v => v.ClickBinding())
                 .To(vm => vm.AddCommand);
 
-            bindingSet.Bind(_menuButton)
-                .For(v => v.ClickBinding())
-                .To(vm => vm.OpenOperationsCommand);
+            //bindingSet.Bind(_menuButton)
+                //.For(v => v.ClickBinding())
+                //.To(vm => vm.OpenOperationsCommand);
         }
     }
 }

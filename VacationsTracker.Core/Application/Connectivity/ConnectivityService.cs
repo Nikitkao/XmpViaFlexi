@@ -24,6 +24,6 @@ namespace VacationsTracker.Core.Application.Connectivity
             }
         }
 
-        public bool IsConnected => _connectivity.NetworkAccess != NetworkAccess.None;
+        public bool IsConnected => _connectivity.NetworkAccess == NetworkAccess.Internet;
     }
 }

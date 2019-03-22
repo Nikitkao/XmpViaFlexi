@@ -42,6 +42,13 @@ namespace VacationsTracker.Core.DataAccess
             return await _db.Table<OfflineVacation>().ToListAsync();
         }
 
+        public async Task<OfflineVacation> GetItem(Guid id)
+        {
+            if (!_isInitialized)
+                await InitializeDb();
+            return await _db.Table<OfflineVacation>().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<int> InsertOrReplace(OfflineVacation vacation)
         {
             if (!_isInitialized)

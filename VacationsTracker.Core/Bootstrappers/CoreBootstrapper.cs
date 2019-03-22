@@ -30,19 +30,19 @@ namespace VacationsTracker.Core.Bootstrappers
 
             simpleIoc.Register(() => Connectivity.Instance);
 
-            simpleIoc.Register<ISecureStorage>(() => new CustomSecureStorage(), Reuse.Singleton);
-
-            simpleIoc.Register<IVacationApi>(() => new VacationsApi(simpleIoc.Get<ISecureStorage>()), Reuse.Singleton);
-
-            simpleIoc.Register<IVacationRepository>(() => new VacationsRepository(simpleIoc.Get<IVacationApi>()), Reuse.Singleton);
-
             simpleIoc.Register<IDbService>(() => new DbService(), Reuse.Singleton);
 
-            simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>(), simpleIoc.Get<IVacationApi>()), Reuse.Singleton);
+            simpleIoc.Register<ISecureStorage>(() => new CustomSecureStorage(), Reuse.Singleton);
+
+            simpleIoc.Register<IVacationApi>(() => new VacationsApi(simpleIoc.Get<ISecureStorage>(), simpleIoc.Get<IConnectivity>()), Reuse.Singleton);
+
+            simpleIoc.Register<IVacationRepository>(() => new VacationsRepository(simpleIoc.Get<IVacationApi>(), simpleIoc.Get<IDbService>()), Reuse.Singleton);
 
             simpleIoc.Register<ISynchronizationService>(() => new SynchronizationService(simpleIoc.Get<IDbService>(), simpleIoc.Get<IVacationRepository>()), Reuse.Singleton);
 
             simpleIoc.Register<IConnectivityService>(() => new ConnectivityService(simpleIoc.Get<IConnectivity>(), simpleIoc.Get<ISynchronizationService>()), Reuse.Singleton);
+            
+            simpleIoc.Register<IUserRepository>(() => new UserRepository(simpleIoc.Get<ISecureStorage>(), simpleIoc.Get<IVacationApi>()), Reuse.Singleton);
 
             simpleIoc.Register<IDependencyProvider>(() => new DependencyProvider(simpleIoc.Get<IConnectivityService>()));
 

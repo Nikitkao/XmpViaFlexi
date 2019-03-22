@@ -12,9 +12,9 @@ namespace VacationsTracker.Droid.Views
     {
          private readonly Activity activity;
 
-         private TextView deleteButton;
          private TextView navTitle;
          private TextView saveButton;
+         private TextView deleteButton;
          private ProgressBar ctrlActivityIndicator;
          private LinearLayout rootLayout;
          private Android.Support.V4.View.ViewPager vacationTypePager;
@@ -39,16 +39,16 @@ namespace VacationsTracker.Droid.Views
         }
 
         
-        public TextView DeleteButton =>
-            deleteButton ?? (deleteButton = activity.FindViewById<TextView>(Resource.Id.delete_button));
-
-        
         public TextView NavTitle =>
             navTitle ?? (navTitle = activity.FindViewById<TextView>(Resource.Id.nav_title));
 
         
         public TextView SaveButton =>
             saveButton ?? (saveButton = activity.FindViewById<TextView>(Resource.Id.save_button));
+
+        
+        public TextView DeleteButton =>
+            deleteButton ?? (deleteButton = activity.FindViewById<TextView>(Resource.Id.delete_button));
 
         
         public ProgressBar CtrlActivityIndicator =>
@@ -153,6 +153,7 @@ namespace VacationsTracker.Droid.Views
     {
          private readonly Activity activity;
 
+         private TextView navTitle;
          private Android.Support.V4.Widget.DrawerLayout drawerLayout;
          private Android.Support.V4.Widget.SwipeRefreshLayout refresher;
          private Android.Support.V7.Widget.RecyclerView recyclerView;
@@ -165,6 +166,10 @@ namespace VacationsTracker.Droid.Views
 
             this.activity = activity;
         }
+
+        
+        public TextView NavTitle =>
+            navTitle ?? (navTitle = activity.FindViewById<TextView>(Resource.Id.nav_title));
 
         
         public Android.Support.V4.Widget.DrawerLayout DrawerLayout =>

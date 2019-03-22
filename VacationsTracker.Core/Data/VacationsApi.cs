@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VacationsTracker.Core.Application;
 using VacationsTracker.Core.DataAccess;
+using VacationsTracker.Core.Exceptions;
+using VacationsTracker.Core.Infrastructure.Connectivity;
+using Xamarin.Essentials;
 
 namespace VacationsTracker.Core.Data
 {
@@ -15,11 +18,13 @@ namespace VacationsTracker.Core.Data
     {
         private readonly HttpClient _client;
         private readonly ISecureStorage _storage;
+        private readonly IConnectivity _connectivity;
 
-        public VacationsApi(ISecureStorage storage)
+        public VacationsApi(ISecureStorage storage, IConnectivity connectivity)
         {
             _storage = storage;
-            
+            _connectivity = connectivity;
+
             _client = new HttpClient
             {
                 BaseAddress = new Uri(Constants.VacationApiUrl)
@@ -59,6 +64,11 @@ namespace VacationsTracker.Core.Data
 
         public async Task<T> SendRequest<T>(HttpRequestMessage request)
         {
+            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                throw  new InternetConnectionException("No internet connection");
+            }
+
             var response = await _client.SendAsync(request);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)

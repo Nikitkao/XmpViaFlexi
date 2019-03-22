@@ -17,10 +17,6 @@ namespace VacationsTracker.Core.Operations
             {
                 return Task.FromResult(true);
             }
-            //else
-            //{
-                //return Task.FromResult(false);
-            //}
             throw new InternetConnectionException("No internet connection. TODO localize.");
         }
     }

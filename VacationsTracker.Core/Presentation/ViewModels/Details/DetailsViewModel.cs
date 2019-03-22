@@ -9,7 +9,6 @@ using FlexiMvvm.Operations;
 using VacationsTracker.Core.Data;
 using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Domain;
-using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Operations;
 
@@ -70,7 +69,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
             }
         }
 
-        public bool _deleteVisibility;
+        private bool _deleteVisibility;
 
         public bool DeleteVisibility
         {
@@ -113,7 +112,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 return;
             await OperationFactory
                 .CreateOperation(OperationContext)
-                .WithInternetConnectionCondition()
                 .WithLoadingNotification()
                 .WithExpressionAsync(token =>
                 {
@@ -128,24 +126,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                     return _vacationsRepository.AddOrUpdateAsync(vac, token);
                 })
                 .OnSuccess(_ => _navigationService.CloseDetails(this))
-                .OnError<InternetConnectionException>(h =>
-                {
-                    var item = new OfflineVacation()
-                    {
-                        Id = Guid.Parse(Id),
-                        Start = Start,
-                        End = End,
-                        VacationStatus = VacationStatus,
-                        VacationType = VacationType,
-                        Created = _created,
-                        CreatedBy = _createdBy,
-                        Type = OperationType.AddOrUpdate
-                    };
-
-                    _dbService.InsertOrReplace(item);
-                    Debug.WriteLine("Connection Exception");
-                    _navigationService.CloseDetails(this);
-                })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }
@@ -167,7 +147,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
             {
                 await OperationFactory
                     .CreateOperation(OperationContext)
-                    .WithInternetConnectionCondition()
                     .WithLoadingNotification()
                     .WithExpressionAsync(token =>
                     {
@@ -183,7 +162,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                         _created = vacation.Created;
                         _createdBy = vacation.CreatedBy;
                     })
-                    .OnError<InternetConnectionException>(_ => { })
                     .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                     .ExecuteAsync();
             }
@@ -193,26 +171,9 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
         {
             await OperationFactory
                 .CreateOperation(OperationContext)
-                .WithInternetConnectionCondition()
                 .WithLoadingNotification()
                 .WithExpressionAsync(token => _vacationsRepository.DeleteVacationAsync(Id, token))
                 .OnSuccess(_ => _navigationService.CloseDetails(this))
-                .OnError<InternetConnectionException>(h =>
-                {
-                    var item = new OfflineVacation()
-                    {
-                        Id = Guid.Parse(Id),
-                        Type = OperationType.Delete,
-                        Start = Start,
-                        End = End,
-                        VacationStatus = VacationStatus,
-                        VacationType = VacationType,
-                };
-
-                    _dbService.InsertOrReplace(item);
-                    Debug.WriteLine("Connection Exception");
-                    _navigationService.CloseDetails(this);
-                })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }

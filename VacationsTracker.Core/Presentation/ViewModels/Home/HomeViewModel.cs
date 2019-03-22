@@ -6,7 +6,6 @@ using FlexiMvvm.Collections;
 using FlexiMvvm.Commands;
 using FlexiMvvm.Operations;
 using VacationsTracker.Core.DataAccess;
-using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Operations;
 
@@ -58,7 +57,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
 
             return OperationFactory
                 .CreateOperation(OperationContext)
-                .WithInternetConnectionCondition()
                 .WithLoadingNotification()
                 .WithExpressionAsync(token => _vacationsRepository.GetVacationsAsync(token))
                 .OnSuccess(vacations =>
@@ -70,7 +68,6 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
                         Vacations.Add(new VacationCellViewModel(vacation));
                     }
                 })
-                .OnError<InternetConnectionException>(_ => { })
                 .OnError<AuthenticationException>(ex => Debug.WriteLine(ex))
                 .ExecuteAsync();
         }

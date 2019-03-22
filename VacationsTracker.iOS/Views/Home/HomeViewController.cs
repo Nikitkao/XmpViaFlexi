@@ -13,7 +13,7 @@ namespace VacationsTracker.iOS.Views.Home
     {
         private UITableViewObservablePlainSource VacationsSource { get; set; }
 
-        private UIBarButtonItem OperationsButton { get; } = new UIBarButtonItem(Strings.Operations_Title, UIBarButtonItemStyle.Done, null);
+        //private UIBarButtonItem OperationsButton { get; } = new UIBarButtonItem(Strings.Operations_Title, UIBarButtonItemStyle.Done, null);
 
         private UIBarButtonItem AddButton { get; } = new UIBarButtonItem("Add", UIBarButtonItemStyle.Done, null);
 
@@ -27,7 +27,7 @@ namespace VacationsTracker.iOS.Views.Home
         {
             base.ViewWillAppear(animated);
 
-            NavigationItem.LeftBarButtonItem = OperationsButton;
+            //NavigationItem.LeftBarButtonItem = OperationsButton;
             NavigationItem.RightBarButtonItem = AddButton;
 
             await ViewModel.LoadVacations();
@@ -71,9 +71,9 @@ namespace VacationsTracker.iOS.Views.Home
                 .For(v => v.ValueChangedBinding())
                 .To(vm => vm.RefreshCommand);
 
-            bindingSet.Bind(OperationsButton)
-                .For(v => v.NotNull().ClickedBinding())
-                .To(vm => vm.OpenOperationsCommand);
+            //bindingSet.Bind(OperationsButton)
+                //.For(v => v.NotNull().ClickedBinding())
+                //.To(vm => vm.OpenOperationsCommand);
 
             bindingSet.Bind(AddButton)
                 .For(v => v.NotNull().ClickedBinding())

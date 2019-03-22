@@ -217,7 +217,7 @@ namespace VacationsTracker.iOS.Views.Details
 
             this.AddConstraints(
                DeleteButton.WithSameCenterX(this),
-               DeleteButton.AtBottomOf(this, 10));
+               DeleteButton.Below(StatusSegmentedControl, 20));
         }
 
         private void SetupDatePicker(UIDatePicker picker)

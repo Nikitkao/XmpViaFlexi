@@ -36,6 +36,8 @@ namespace VacationsTracker.iOS.Views.Home.VacationsTable
         {
             base.SetupLayout();
 
+            TypeImage.Image = null; //UIImage.FromBundle("Icon_Request_Plum");
+
             AddSubview(TypeImage);
             AddSubview(DurationLabel);
             AddSubview(TypeLabel);

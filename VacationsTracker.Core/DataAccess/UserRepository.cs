@@ -1,4 +1,5 @@
-﻿using System.Security.Authentication;
+﻿using System.Net.Http;
+using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
@@ -22,27 +23,28 @@ namespace VacationsTracker.Core.DataAccess
 
         public async Task AuthorizeAsync(User user, CancellationToken token = default)
         {
-            var discoveryClient = new DiscoveryClient(Constants.IdentityServiceUrl);
+            var httpClient = new HttpClient();
 
-            discoveryClient.Policy.RequireHttps = false;
+            var discoveryClient = await httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest()
+            {
+                Address = Constants.IdentityServiceUrl,
+                Policy = {RequireHttps = false}
+            }, token);
 
-            var identityServer = await discoveryClient.GetAsync(token);
-
-            if (identityServer.IsError)
+            if (discoveryClient.IsError)
             {
                 throw new AuthenticationException();
             }
 
-            var authClient = new TokenClient(
-                identityServer.TokenEndpoint,
-                Constants.ClientId,
-                Constants.ClientSecret);
-
-            var userTokenResponse = await authClient.RequestResourceOwnerPasswordAsync(
-                user.Login,
-                user.Password,
-                Constants.Scope,
-                cancellationToken: token);
+            var userTokenResponse = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
+            {
+                Address = discoveryClient.TokenEndpoint,
+                ClientId = Constants.ClientId,
+                ClientSecret = Constants.ClientSecret,
+                Scope = Constants.Scope,
+                UserName = user.Login,
+                Password = user.Password
+            }, token);
 
             if (userTokenResponse.IsError || userTokenResponse.AccessToken == null)
             {

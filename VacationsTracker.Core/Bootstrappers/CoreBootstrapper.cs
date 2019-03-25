@@ -53,8 +53,7 @@ namespace VacationsTracker.Core.Bootstrappers
             simpleIoc.Register<IUserRepository>(
                 () => new UserRepository(
                     simpleIoc.Get<ISecureStorage>(),
-                    simpleIoc.Get<IVacationApi>()),
-                Reuse.Singleton);
+                    simpleIoc.Get<IVacationApi>()));
 
             simpleIoc.Register<IDependencyProvider>(() => new DependencyProvider(simpleIoc.Get<IConnectivity>()));
 

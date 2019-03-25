@@ -1,6 +1,8 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
 using VacationsTracker.Core.Domain;
+using VacationsTracker.Core.Infrastructure.Connectivity;
+using Xamarin.Essentials;
 
 namespace VacationsTracker.Core.DataAccess
 {
@@ -8,21 +10,32 @@ namespace VacationsTracker.Core.DataAccess
     {
         private readonly IDbService _dbService;
         private readonly IVacationRepository _vacationRepository;
-
+        private readonly IConnectivity _connectivity;
         private bool _isRunning;
 
-        public SynchronizationService(IDbService dbService, IVacationRepository vacationRepository)
+        public SynchronizationService(IDbService dbService, IVacationRepository vacationRepository, IConnectivity connectivity)
         {
             _dbService = dbService;
             _vacationRepository = vacationRepository;
+            _connectivity = connectivity;
+
+            //_connectivity.ConnectivityChangedWeakSubscribe(ConnectivityOnConnectivityChanged);
+            _connectivity.ConnectivityChanged += ConnectivityOnConnectivityChanged;
         }
 
-        public async Task TrySynchronize()
+        private void ConnectivityOnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            TrySynchronize();
+        }
+
+        public async void TrySynchronize()
         {
             try
             {
-                if (_isRunning)
+                if (!_connectivity.IsConnected || _isRunning)
+                {
                     return;
+                }
 
                 _isRunning = true;
 
@@ -32,7 +45,6 @@ namespace VacationsTracker.Core.DataAccess
                 
                 foreach (var awaitingOperation in vacationsToUpdate)
                 {
-
                     switch (awaitingOperation.Type)
                     {
                         case OperationType.AddOrUpdate:

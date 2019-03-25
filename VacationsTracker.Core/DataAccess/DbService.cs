@@ -11,7 +11,7 @@ namespace VacationsTracker.Core.DataAccess
     {
         private readonly SQLiteAsyncConnection _db;
 
-        private bool _isInitialized;
+        private readonly Task _iniTask;
 
         public DbService()
         {
@@ -19,7 +19,7 @@ namespace VacationsTracker.Core.DataAccess
                 "MyData.db");
             _db = new SQLiteAsyncConnection(databasePath);
 
-            InitializeDb();
+            _iniTask = InitializeDb();
         }
 
         private async Task InitializeDb()
@@ -27,7 +27,6 @@ namespace VacationsTracker.Core.DataAccess
             try
             {
                 await _db.CreateTableAsync<OfflineVacation>();
-                _isInitialized = true;
             }
             catch (Exception e)
             {
@@ -37,36 +36,36 @@ namespace VacationsTracker.Core.DataAccess
 
         public async Task<List<OfflineVacation>> GetItems()
         {
-            if (!_isInitialized)
-                await InitializeDb();
+            await _iniTask;
+
             return await _db.Table<OfflineVacation>().ToListAsync();
         }
 
         public async Task<OfflineVacation> GetItem(Guid id)
         {
-            if (!_isInitialized)
-                await InitializeDb();
+            await _iniTask;
+
             return await _db.Table<OfflineVacation>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> InsertOrReplace(OfflineVacation vacation)
         {
-            if (!_isInitialized)
-                await InitializeDb();
+            await _iniTask;
+
             return await _db.InsertOrReplaceAsync(vacation);
         }
 
         public async Task<OfflineVacation> GetFirstOrDefault()
         {
-            if (!_isInitialized)
-                await InitializeDb();
+            await _iniTask;
+
             return await _db.Table<OfflineVacation>().FirstOrDefaultAsync();
         }
 
         public async Task<int> RemoveItem(OfflineVacation vacation)
         {
-            if (!_isInitialized)
-                await InitializeDb();
+            await _iniTask;
+
             return await _db.DeleteAsync(vacation);
         }
     }

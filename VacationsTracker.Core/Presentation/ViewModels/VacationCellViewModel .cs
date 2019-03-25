@@ -45,5 +45,13 @@ namespace VacationsTracker.Core.Presentation.ViewModels
             Status = vac.VacationStatus;
             Type = vac.VacationType;
         }
+
+        public VacationCellViewModel(OfflineVacation vac)
+        {
+            Id = vac.Id.ToString();
+            Duration = new Duration() { End = vac.End, Start = vac.Start };
+            Status = vac.VacationStatus;
+            Type = vac.VacationType;
+        }
     }
 }

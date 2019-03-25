@@ -22,20 +22,32 @@ namespace VacationsTracker.Core.Presentation
 
         protected override void SetupFactory(ViewModelFactory factory)
         {
-            factory.Register(() => new EntryViewModel(_dependencyProvider.Get<INavigationService>(),
+            factory.Register(() => new EntryViewModel(
+                _dependencyProvider.Get<INavigationService>(),
                 _dependencyProvider.Get<ISecureStorage>()));
+
             factory.Register(() => new LoginViewModel(
                 _dependencyProvider.Get<INavigationService>(),
                 _dependencyProvider.Get<IUserRepository>(),
                 _dependencyProvider.Get<IOperationFactory>()));
-            factory.Register(() => new HomeViewModel(_dependencyProvider.Get<INavigationService>(),
-                _dependencyProvider.Get<IVacationRepository>(), _dependencyProvider.Get<ISynchronizationService>(),
-                _dependencyProvider.Get<IOperationFactory>()));
-            factory.Register(() => new DetailsViewModel(_dependencyProvider.Get<INavigationService>(),
-                _dependencyProvider.Get<IVacationRepository>(), _dependencyProvider.Get<IOperationFactory>(),
+
+            factory.Register(() => new HomeViewModel(
+                _dependencyProvider.Get<INavigationService>(),
+                _dependencyProvider.Get<IVacationRepository>(),
+                _dependencyProvider.Get<ISynchronizationService>(),
+                _dependencyProvider.Get<IOperationFactory>(),
                 _dependencyProvider.Get<IDbService>()));
+
+            factory.Register(() => new DetailsViewModel(
+                _dependencyProvider.Get<INavigationService>(),
+                _dependencyProvider.Get<IVacationRepository>(),
+                _dependencyProvider.Get<IOperationFactory>(),
+                _dependencyProvider.Get<IDbService>()));
+
            factory.Register(() => new VacationTypeItemViewModel());
-           factory.Register(() => new PendingOperationsViewModel(_dependencyProvider.Get<IDbService>(),
+
+           factory.Register(() => new PendingOperationsViewModel(
+               _dependencyProvider.Get<IDbService>(),
                _dependencyProvider.Get<IOperationFactory>()));
         }
     }

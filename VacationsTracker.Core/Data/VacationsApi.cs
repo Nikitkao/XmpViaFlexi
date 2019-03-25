@@ -10,7 +10,6 @@ using VacationsTracker.Core.Application;
 using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Infrastructure.Connectivity;
-using Xamarin.Essentials;
 
 namespace VacationsTracker.Core.Data
 {
@@ -64,7 +63,7 @@ namespace VacationsTracker.Core.Data
 
         public async Task<T> SendRequest<T>(HttpRequestMessage request)
         {
-            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            if (!_connectivity.IsConnected)
             {
                 throw  new InternetConnectionException("No internet connection");
             }

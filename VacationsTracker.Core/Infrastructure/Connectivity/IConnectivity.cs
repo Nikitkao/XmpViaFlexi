@@ -11,5 +11,7 @@ namespace VacationsTracker.Core.Infrastructure.Connectivity
         NetworkAccess NetworkAccess { get; }
 
         IEnumerable<ConnectionProfile> ConnectionProfiles { get; }
+
+        bool IsConnected { get; }
     }
 }

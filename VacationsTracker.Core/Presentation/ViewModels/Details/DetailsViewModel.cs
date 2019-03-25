@@ -9,6 +9,7 @@ using FlexiMvvm.Operations;
 using VacationsTracker.Core.Data;
 using VacationsTracker.Core.DataAccess;
 using VacationsTracker.Core.Domain;
+using VacationsTracker.Core.Exceptions;
 using VacationsTracker.Core.Navigation;
 using VacationsTracker.Core.Operations;
 
@@ -126,6 +127,23 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                     return _vacationsRepository.AddOrUpdateAsync(vac, token);
                 })
                 .OnSuccess(_ => _navigationService.CloseDetails(this))
+                .OnError<InternetConnectionException>(async error =>
+                {
+                    var item = new OfflineVacation()
+                    {
+                        Id = Guid.Parse(Id),
+                        Start = Start,
+                        End = End,
+                        VacationStatus = VacationStatus,
+                        VacationType = VacationType,
+                        Created = _created,
+                        CreatedBy = _createdBy,
+                        Type = OperationType.AddOrUpdate
+                    };
+
+                    await _dbService.InsertOrReplace(item);
+                    _navigationService.CloseDetails(this);
+                })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }
@@ -148,11 +166,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 await OperationFactory
                     .CreateOperation(OperationContext)
                     .WithLoadingNotification()
-                    .WithExpressionAsync(token =>
-                    {
-                        var id = parameters.VacationId;
-                        return _vacationsRepository.GetVacationAsync(id, token);
-                    })
+                    .WithExpressionAsync(token => _dbService.GetItem(Guid.Parse(parameters.VacationId)))
                     .OnSuccess(vacation =>
                     {
                         Start = vacation.Start;
@@ -174,6 +188,15 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Details
                 .WithLoadingNotification()
                 .WithExpressionAsync(token => _vacationsRepository.DeleteVacationAsync(Id, token))
                 .OnSuccess(_ => _navigationService.CloseDetails(this))
+                .OnError<InternetConnectionException>(async error =>
+                {
+                    var vacation = await _dbService.GetItem(Guid.Parse(Id));
+                    vacation.Type = OperationType.Delete;
+
+                    await _dbService.InsertOrReplace(vacation);
+
+                    _navigationService.CloseDetails(this);
+                })
                 .OnError<Exception>(error => Debug.WriteLine(error.Exception))
                 .ExecuteAsync();
         }

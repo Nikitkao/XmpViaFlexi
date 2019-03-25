@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using FlexiMvvm;
 using FlexiMvvm.Operations;
-using VacationsTracker.Core.Application.Connectivity;
 using VacationsTracker.Core.Exceptions;
+using VacationsTracker.Core.Infrastructure.Connectivity;
 
 namespace VacationsTracker.Core.Operations
 {
@@ -11,7 +11,7 @@ namespace VacationsTracker.Core.Operations
     {
         public override Task<bool> CheckAsync(OperationContext context, CancellationToken cancellationToken)
         {
-            var connectivityService = context.DependencyProvider.NotNull().Get<IConnectivityService>();
+            var connectivityService = context.DependencyProvider.NotNull().Get<IConnectivity>();
             
             if (connectivityService.IsConnected)
             {

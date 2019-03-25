@@ -17,15 +17,6 @@ namespace VacationsTracker.Droid.Views
         protected override void OnCreate(Bundle savedInstanceState)
         {
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            var config = new BootstrapperConfig();
-            config.SetSimpleIoc(new SimpleIoc());
-
-
-            var compositeBootstrapper = new CompositeBootstrapper(
-                new CoreBootstrapper(),
-                new AndroidBootstrapper());
-
-            compositeBootstrapper.Execute(config);
 
             base.OnCreate(savedInstanceState);
         }

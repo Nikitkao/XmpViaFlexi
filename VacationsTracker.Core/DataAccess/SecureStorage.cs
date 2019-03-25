@@ -13,7 +13,7 @@ namespace VacationsTracker.Core.DataAccess
                 var oauthToken = await SecureStorage.GetAsync(key);
                 return oauthToken;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Possible that device doesn't support secure storage on device.
             }
@@ -26,7 +26,7 @@ namespace VacationsTracker.Core.DataAccess
             {
                 await SecureStorage.SetAsync(key, value);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Possible that device doesn't support secure storage on device.
             }

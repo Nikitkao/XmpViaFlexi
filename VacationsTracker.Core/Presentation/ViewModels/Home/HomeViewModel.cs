@@ -50,6 +50,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
             IDbService dbService)
             : base(operationFactory)
         {
+
             _navigationService = navigationService;
             _vacationsRepository = vacationsRepository;
             _synchronizationService = synchronizationService;
@@ -100,6 +101,7 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
 
         private async Task UpdateOfflineVacations(IEnumerable<Vacation> serverVacations)
         {
+            var serverVacationsList = serverVacations.ToList();
             var offlineVacations = new List<Vacation>();
             var dbVacations = await _dbService.GetItems();
 
@@ -110,14 +112,14 @@ namespace VacationsTracker.Core.Presentation.ViewModels.Home
                 offlineVacations.Add(offlineVacation.ToVacation());
             }
 
-            var vacationsToRemove = offlineVacations.Except(serverVacations);
+            var vacationsToRemove = offlineVacations.Except(serverVacationsList);
 
             foreach (var vac in vacationsToRemove)
             {
                 await _dbService.RemoveItem(vac.ToOffline());
             }
 
-            foreach (var a in serverVacations)
+            foreach (var a in serverVacationsList)
             {
                 var itemToUpdate = await _dbService.GetItem(Guid.Parse(a.Id));
 

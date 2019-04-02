@@ -25,33 +25,40 @@ namespace VacationsTracker.Core.DataAccess
         {
             var httpClient = new HttpClient();
 
-            var discoveryClient = await httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest()
-            {
-                Address = Constants.IdentityServiceUrl,
-                Policy = {RequireHttps = false}
-            }, token);
+            var discoveryClient = await httpClient.GetDiscoveryDocumentAsync(
+                new DiscoveryDocumentRequest()
+                {
+                    Address = Constants.IdentityServiceUrl,
+                    Policy = {RequireHttps = false}
+                },
+                token);
 
             if (discoveryClient.IsError)
             {
                 throw new AuthenticationException();
             }
 
-            var userTokenResponse = await httpClient.RequestPasswordTokenAsync(new PasswordTokenRequest
-            {
-                Address = discoveryClient.TokenEndpoint,
-                ClientId = Constants.ClientId,
-                ClientSecret = Constants.ClientSecret,
-                Scope = Constants.Scope,
-                UserName = user.Login,
-                Password = user.Password
-            }, token);
+            var userTokenResponse = await httpClient.RequestPasswordTokenAsync(
+                new PasswordTokenRequest
+                {
+                    Address = discoveryClient.TokenEndpoint,
+                    ClientId = Constants.ClientId,
+                    ClientSecret = Constants.ClientSecret,
+                    Scope = Constants.Scope,
+                    UserName = user.Login,
+                    Password = user.Password
+                },
+                token);
 
             if (userTokenResponse.IsError || userTokenResponse.AccessToken == null)
             {
                 throw new AuthenticationException();
             }
 
-            await _storage.SetAsync(Constants.TokenStorageKey, userTokenResponse.AccessToken);
+            await _storage.SetAsync(
+                Constants.TokenStorageKey,
+                userTokenResponse.AccessToken);
+
             _vacationApi.SetToken();
         }
     }
